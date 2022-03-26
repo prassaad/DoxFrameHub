@@ -11,10 +11,7 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\bpmn-js\BPMNEditor.js" />
-    <Content Remove="wwwroot\js\AjaxHelper.js" />
-  </ItemGroup>
+  
 
   <ItemGroup>
     <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.0.0" />
