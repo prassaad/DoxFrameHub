@@ -13,14 +13,13 @@ var _frmProjectId = "";
 var _frmFormId = "";
 var _frmProjectTitle = "";
 var _frmFormTitle = "";
-var _utility = new Utility();
 var _hostUrl = "";
 
 $(document).ready(function () {
 
 	var _utility = new Utility();
 	_hostUrl = _utility.GetHostUrl();
-
+	alert(_hostUrl);
 	_frmProjectId = $("#hdnProjectId").val();
 	_frmFormId = $("#hdnFormId").val();
 	_frmProjectTitle = $("#hdnProjectTitle").val();
@@ -96,7 +95,6 @@ $(document).ready(function () {
 		localStorage[_formKey] = JSON.stringify(frmState);
 		//downloadSchema(JSON.stringify(frmState, null, 4), 'form.json', 'text/plain');
 		// Update form Layout
-		var _hostUrl = _hostUrl;
 		var formData = {
 			"projectId": _frmProjectId,
 			"formId": _frmFormId,
