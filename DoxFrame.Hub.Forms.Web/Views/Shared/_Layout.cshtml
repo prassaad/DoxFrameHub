@@ -22,11 +22,7 @@
             <link href="~/css/sidebars.css" rel="stylesheet">
         </environment>
 
-        <!-- Global for Application  -->
-        <script src="~/js/AjaxHelper.js"></script>
-        @*<script src="~/custom/Utility.js"></script>*@
-        <script src="~/js/ValidationHelper.js"></script>
-        <!-- Global for Application -->
+    
 
     </cache>
     <style>
@@ -49,24 +45,23 @@
 
 
 
-    @{
-        string emailAddress = "";
-        string domaiName = "";
-        string name = "";
-        var currTenantUserProfile = Context.Session.Get<TenantUserProfileViewModel>("_TenantUserProfile");
-        if (currTenantUserProfile == null)
-        {
-            //@Html.ActionLink("Log In", "Login", "Account")
-            Context.Response.Redirect("Account/Logout");
+    @{ string emailAddress = "";
+                    string domaiName = "";
+                    string name = "";
+                    var currTenantUserProfile = Context.Session.Get<TenantUserProfileViewModel>("_TenantUserProfile");
+                    if (currTenantUserProfile == null)
+                    {
+                        //@Html.ActionLink("Log In", "Login", "Account")
+                        Context.Response.Redirect("Account/Logout");
 
-        }
-        else {
+                    }
+                    else
+                    {
 
-            emailAddress = currTenantUserProfile.EmailAddress;
-            domaiName = currTenantUserProfile.DomainName;
-            name = currTenantUserProfile.Name;
-        }
-    }
+                        emailAddress = currTenantUserProfile.EmailAddress;
+                        domaiName = currTenantUserProfile.DomainName;
+                        name = currTenantUserProfile.Name;
+                    } }
 
 
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -206,7 +201,7 @@
     </div>
 
     <environment names="Development">
-          <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/sidebars.js"></script>
         @*<script src="~/js/site.js" asp-append-version="true"></script>*@
@@ -215,19 +210,23 @@
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery">
-        </script>
+                asp-fallback-test="window.jQuery"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/5.1.3/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-        </script>
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>
         @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
         <script src="~/js/sidebars.js"></script>
     </environment>
 
+
+    <!-- Global for Application  -->
+    <script src="~/js/AjaxHelper.js"></script>
+    @*<script src="~/custom/Utility.js"></script>*@
+    <script src="~/js/ValidationHelper.js"></script>
+    <!-- Global for Application -->
     @* Tool *@
     <script src="~/js/Utility.js"></script>
- 
+
     @* Forms Tool Scripts*@
 
     <script src="/forms/js/jquery.ui.min.js"></script>
