@@ -1,0 +1,421 @@
+﻿
+
+<link rel="stylesheet" href="/forms/css/jquery.ui.theme.css" />
+@*<link rel="stylesheet" href="/forms/css/bootstrap.css" />*@
+
+<style>
+    .droppable-active {
+        background-color: #ffe !important;
+    }
+
+    .tools a {
+        cursor: pointer;
+        font-size: 80%;
+    }
+
+    .form-body .col-md-6, .form-body .col-md-12 {
+        min-height: 400px;
+    }
+
+    .draggable {
+        cursor: move;
+    }
+
+    .field {
+        display: flex;
+        align-items: center;
+    }
+
+    span {
+        padding: 10px;
+    }
+</style>
+
+
+
+<ul class="nav justify-content-end border border-1">
+    <li class="nav-item">
+        <a class="nav-link">
+            <span class="text-dark align-text-bottom">
+                Project : @ViewBag.ProjectTitle
+            </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <span class="text-dark align-text-bottom">
+                Form : @ViewBag.FormTitle
+            </span>
+        </a>
+    </li>
+    <button type="button" class="btn" id="copy-to-storage"><img src="/forms/icons/plus-circle.svg" alt="" width="24" height="24"></button>
+    <button type="button" class="btn" id="open-to-storage"><img src="/forms/icons/folder2-open.svg" alt="" width="24" height="24"></button>
+    <button type="button" class="btn" id="copy-to-file"><img src="/forms/icons/save.svg" alt="" width="24" height="24"></button>
+    <li class="nav-item">
+        <a class="nav-link" href="#"> Preview in new tab&nbsp;<img class="design-mode" style="cursor: pointer" src="/forms/icons/design-mode-off.svg" alt="" width="24" height="24"></a>
+    </li>
+    <button type="button" class="btn" id="save-to-db"><img src="/forms/icons/save-to-db.svg" alt="" width="24" height="24"></button>
+
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@ViewBag.ProjectId><span class="btn btn-close"></span> </a>
+    </li>
+</ul>
+
+@*<button type="button" class="btn" id="copy-to-storage"><img src="/forms/icons/plus-circle.svg" alt="" width="24" height="24"></button>*@
+
+@*<nav class="navbar navbar-default navbar-fixed" role="navigation">
+             <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="row">
+                     <div class="col-md-4" style="font-size: 14px;">
+                         <form class="navbar-form navbar-left">
+                             <button type="button" class="btn" id="copy-to-storage"><img src="/forms/icons/plus-circle.svg" alt="" width="24" height="24"></button>
+                             <button type="button" class="btn" id="open-to-storage"><img src="/forms/icons/folder2-open.svg" alt="" width="24" height="24"></button>
+                             <button type="button" class="btn" id="copy-to-file"><img src="/forms/icons/save.svg" alt="" width="24" height="24"></button>
+                             <button type="button" class="btn"><img class="design-mode" style="cursor: pointer" src="/forms/icons/design-mode-off.svg" alt="" width="24" height="24"></button>
+                             <button type="button" class="btn"><img class="design-mode" style="cursor: pointer" src="/forms/icons/save-to-db.svg" alt="" width="24" height="24"></button>
+                         </form>
+                     </div>
+                     <div class="col-md-3">Area : Sales  Document Name : Order</br>Document Type : Form/Filter/Report</div>
+                     <div class="col-md-2">Operation Type : Add / Edit / View</br>Form Key: ASDF124</div>
+                     <div class="col-md-1"><button type="button" class="btn" id="copy-to-storage"><img class="design-mode" style="cursor: pointer" src="/forms/icons/Icon_close.svg" alt="" width="24" height="24"></button></div>
+                 </div>
+    </nav>*@
+@* This can be used for save form layout to local *@
+<input id="file-input" type="file" name="name" style="display: none;" />
+<div class="my-1 p-1 bg-body rounded shadow-sm">
+    <div class="row">
+        <div class="col-md-2" style="padding: 0px 30px 30px 30px; background-color: #fff;">
+
+            <h3>Elements</h3>
+            <form role="form">
+                <div class="mb-3 row draggable">
+                    <div class="field" id="input-text-1">
+                        <img src="/forms/icons/Textfield.svg" width="40" alt="">
+                        <span id="TextBox">Text Box</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="select-1">
+                        <img src="/forms/icons/Select.svg" width="40" alt="">
+                        <span id="DropDown">Select</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="input-date-1">
+                        <img src="/forms/icons/Number.svg" width="40" alt="">
+                        <span id="Date">Date</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="Checkbox-1">
+                        <img src="/forms/icons/Checkbox.svg" width="40" alt="">
+                        <span id="CheckBox">Check Box</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="radio-1">
+                        <img src="/forms/icons/Radio.svg" width="40" alt="">
+                        <span id="Radio">Radio</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="label-1">
+                        <img src="/forms/icons/Label.svg" width="40" alt="">
+                        <span id="Label">Label</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="button-1">
+                        <img src="/forms/icons/Button.svg" width="40" alt="">
+                        <span id="Button">Button</span>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class='header col-md-10'>
+            <div style="background-color: #fff; border-radius: 5px; padding: 20px;
+						box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); ">
+                <div id="viewer" class="col-md-12" style="display: none;"></div>
+                <div class="row form-body">
+
+                    <div id="canvas" style="background-image: radial-gradient(circle, #ddd 1px, rgba(0,0,0,0) 1px);background-size: 1rem 1rem;" class="col-md-12 form-horizontal droppable sortable">
+                        <div id="no-content-div" class="d-block text-center">
+                            <h3>Design @ViewBag.FormTitle Form</h3> <br />
+                            <h5> You can drag & drop UI components from the left menu on the  screen.</h5>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class='detailsView col-md-4' style='display:none'>
+            <div style="background-color: #fff; border-radius: 5px; padding: 20px;
+						box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); ">
+                <div class="row">
+                    <div class="col-md-10 pull-left" style="font-size: 14px;">Key&nbsp;:<span class='field_key'></span></div>
+                    <div class="col-md-2"><a type="button" class="close">&times;</a></div>
+                </div>
+                <div class="row form-body">
+                    <div class="tabs-panel">
+                        <!-- Tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="#tab0" aria-controls="tab0" role="tab"
+                                   data-toggle="tab">Basic</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="#tab1" aria-controls="tab1" role="tab"
+                                   data-toggle="tab">Control</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="#tab2" aria-controls="tab2" role="tab"
+                                   data-toggle="tab">Data</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" href="#tab3" aria-controls="tab3" role="tab"
+                                   data-toggle="tab">Request</a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="tab0">
+                                <div class="form-horizontal">
+                                    <div class="mb-3 row">
+                                        <label for="Name" class="col-sm-4 control-label data-name" id="Name">Name</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valueName" value="Data1" placeholder="Name" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="AreaName" class="col-sm-4 control-label data-name" id="AreaName">Area Name</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valAreaName" value="Data2" placeholder="Area Name" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="Visible" class="col-sm-4 control-label data-name" id="Visible">Visible</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valVisible" value="true" placeholder="Visible" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="Caption" class="col-sm-4 control-label data-name" id="Caption">Caption</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valCaption" value="Data3" placeholder="Caption" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="IsDependant" class="col-sm-4 control-label data-name" id="IsDependant">Is Dependant</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valIsDependant" value="true" placeholder="Is Dependant" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="ValueSelection" class="col-sm-4 control-label data-name" id="ValueSelection">Required</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valValueSelection" placeholder="Required" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab1">
+                                <div class="form-horizontal">
+                                    <div class="mb-3 row" style="display:none">
+                                        <label for="ControlType" class="col-sm-4 control-label data-name" id="ControlType">Control Type</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valControlType" placeholder="Control Type" value="TextBox" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row" style="display:none">
+                                        <label for="ParentIdentifier"
+                                               class="col-sm-4 control-label data-name" id="ParentIdentifier">Parent Identifier</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valParentIdentifier"
+                                                   placeholder="Parent Identifier" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row" style="display:none">
+                                        <label for="SelectionType" class="col-sm-4 control-label data-name" id="SelectionType">Selection Type</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valSelectionType"
+                                                   placeholder="Selection Type" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-3 row">
+                                        <label for="SourceField" class="col-sm-4 control-label data-name" id="SourceField">Source Field</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valSourceField"
+                                                   placeholder="Source Field" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="DisplayField" class="col-sm-4 control-label data-name" id="DisplayField">Display Field</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valDisplayField"
+                                                   placeholder="Display Field" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="HasDependantChild"
+                                               class="col-sm-4 control-label data-name" id="HasDependantChild">Cascade?</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valHasDependantChild"
+                                                   placeholder="Has Dependant Child" />
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label for="AffectToFilters" class="col-sm-4 control-label data-name" id="AffectFields">Cascade On</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valAffectFields"
+                                                   placeholder="Targer Field(s)" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="FilterField" class="col-sm-4 control-label data-name" id="FilterField">Cascade By</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valFilterField"
+                                                   placeholder="Param" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="ParentValue" class="col-sm-4 control-label data-name" id="ParentValue">Filter Value</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valParentValue"
+                                                   placeholder="Filter Value" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="FilterOperator" class="col-sm-4 control-label data-name" id="FilterOperator">Filter Operator</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valFilterOperator"
+                                                   placeholder="Filter Operator" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="AffectedCondition"
+                                               class="col-sm-4 control-label data-name" id="AffectedCondition">Cascade Condition</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valAffectedCondition"
+                                                   placeholder="Cascade Condition" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab2">
+
+                                <div class="form-horizontal">
+                                    <div class="mb-3 row">
+                                        <label for="SourceType" class="col-sm-4 control-label data-name" id="SourceType">Source Type</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valSourceType"
+                                                   placeholder="Source Type" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="StaticObjectName"
+                                               class="col-sm-4 control-label data-name" id="StaticObjectName">Static Object Name</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valStaticObjectName"
+                                                   placeholder="Static Object Name" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="FixedFields" class="col-sm-4 control-label data-name" id="FixedFields">Keys</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valFixedFields"
+                                                   placeholder="Fixed Fields" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="FixedValues" class="col-sm-4 control-label data-name" id="FixedValues">Values</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valFixedValues"
+                                                   placeholder="Fixed Values" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="tab3">
+                                <div class="form-horizontal">
+                                    <div class="mb-3 row">
+                                        <label for="ODataURL" class="col-sm-4 control-label data-name" id="ODataURL">URL</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valODataURL" placeholder="URL" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="RequestMethod" class="col-sm-4 control-label data-name" id="RequestMethod">Request Method</label>
+                                        <div class="col-sm-7">
+                                            <select class="form-control data-value" id="valRequestMethod">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="RequestContentType"
+                                               class="col-sm-4 control-label data-name" id="RequestContentType">Request Content Type</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valRequestContentType"
+                                                   placeholder="Request Content Type">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="ReturnDataType" class="col-sm-4 control-label data-name" id="ReturnDataType">Return Data Type</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control data-value" id="valReturnDataType"
+                                                   placeholder="Return Data Type" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input type="hidden" id="hdnProjectId" value="@ViewBag.ProjectId" />
+<input type="hidden" id="hdnFormId" value=@ViewBag.FormId />
+<input type="hidden" id="hdnFormKey" value=@ViewBag.FormKey />
+<input type="hidden" id="hdnProjectTitle" value="@ViewBag.ProjectTitle" />
+<input type="hidden" id="hdnFormTitle" value=@ViewBag.FormTitle />
+   
+
+@if (ViewBag.Layout == "New")
+{
+    <input type="hidden" id="hdnHasLayout" value="0" />
+}
+else
+{
+    <input type="hidden" id="hdnHasLayout" value="1" />
+}
+
+@* Set Form Layout Json directly to local storage rather  set to a filed to miss data*@
+<script type="text/javascript">
+    localStorage['@ViewBag.FormKey'] = '@ViewBag.Layout';
+    localStorage['cur-form-key'] = '@ViewBag.FormKey';
+
+</script>
+
+ 
+
+@* Forms scrips NEED TO CLEANSE *@
+
+<script src="/forms/js/FormEditor.js" type="module"></script>
+@*loaded in _Layout page for global access*@
+@*<script src="/forms/js/AjaxHelper.js" type="module"></script>*@
+<script src="/forms/js/StandardData.js" type="module"></script>
+<script src="/forms/js/FilterComponent.js" type="module"></script>

@@ -1,0 +1,199 @@
+﻿@{
+    ViewData["Title"] = "Form Details";
+}
+@model DoxFrame.Hub.Web.ViewModels.ProjectViewModel
+
+<div class="page-header">
+   
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+       
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0">
+            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a asp-area="" asp-controller="Project" asp-action="Index" asp-route-ProjectId=@Model.Id>Projects</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><strong>Forms</strong></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="#"  data-bs-toggle="modal" data-bs-target="#createNewForm">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                    </svg>
+                </a>
+            </li>
+        </ul>
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3s">
+            <input type="search" class="form-control" placeholder="Search form..." aria-label="Search">
+        </form>
+
+        <div class="dropdown text-end">
+            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Project" asp-action="Index" asp-route-projectId=@Model.Id>
+                <span class="btn btn-close"></span>
+            </a>
+        </div>
+    </div>
+    
+    
+    
+</div>
+
+ 
+
+
+
+<div class="my-1 p-1 bg-body rounded">
+    @if (Model.Forms.Count < 1)
+    {
+    <div id="no-content-div" class="d-block text-center">
+        <h3> Having no forms under this @Model.Title</h3> <br />
+        <h5> You can + Create Form from the top menu on the screen.</h5>
+        <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#createNewForm">
+
+            + Create New Form
+        </a>
+    </div>
+    }
+    else
+    {
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Key</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Form Type</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var form in Model.Forms)
+            {
+            <tr>
+                <td>@form.Key</td>
+                <td>
+                    <a class="nav-link active" asp-area="" asp-controller="Project" asp-action="FormSettings" asp-route-ProjectId=@Model.Id asp-route-FormId=@form.Id><span class="d-block">@form.Title</span></a>
+                </td>
+                <td>@form.Description</td>
+                <td>@form.OperationType</td>
+                
+                <td>
+                   
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#remForm">Remove</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="nav-link active" asp-area="" asp-controller="Project" asp-action="FormBuilder" asp-route-ProjectId=@Model.Id asp-route-FormId=@form.Id asp-route-ProjectTitle=@Model.Title asp-route-FormTitle=@form.Title>
+                                Form Editor</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+    }
+</div>
+
+@* New Form Create Modal *@
+<!-- Modal -->
+<div class="modal fade" id="createNewForm" tabindex="-1" aria-labelledby="createNewFormLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="frm-create" class="row g-3 needs-validation" novalidate>
+
+                    <input type="hidden" id="hdnProjId" value=@Model.Id />
+                    <div class="col-12">
+                        <label for="inputFormTitle" class="form-label">Title *</label>
+                        <input type="text" class="form-control" id="inputFormTitle" placeholder="New Form" required>
+                        <div class="invalid-feedback">
+                            Please enter a form title.
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="selectFrmOpType" class="form-label">Form for</label>
+                        <select id="selectFrmOpType" class="form-select">
+                            <option disabled value=""></option>
+                            <option selected value="Create">Create</option>
+                            <option value="View">View</option>
+                            <option value="Update">Update</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Please select a form for Create/View/Update.
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Create</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@* Remove Modal *@
+    <!-- Modal -->
+  <div class="modal fade" id="remForm" tabindex="-1" aria-labelledby="remFormLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frm-remove" class="row g-3 needs-validation" novalidate>
+                        <input type="hidden" id="hdnProjId" value=@Model.Id />
+                        <div class="col-12">
+                            <label for="inputFormTitle" class="form-label">Form Id to be removed*</label>
+                            <input type="text" class="form-control" id="inputFormId" placeholder="Form Id" required>
+                            <div class="invalid-feedback">
+                                Please enter the form Id to confirm remove form.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button class="btn btn-primary" type="submit">Remove</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+@* Form Usability *@
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/forms/js/FormsManager.js" type="module"></script>
+
+<script>
+    var createModal = document.getElementById('createNewForm')
+    var inputFormTitle = document.getElementById('inputFormTitle')
+
+    createModal.addEventListener('shown.bs.modal', function () {
+        inputFormTitle.focus()
+    });
+
+
+</script>

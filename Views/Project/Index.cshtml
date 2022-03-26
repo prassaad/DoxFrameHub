@@ -1,0 +1,334 @@
+﻿
+@model IEnumerable<DoxFrame.Hub.Web.ViewModels.ProjectListViewModel>
+
+<style type="text/css">
+
+    /* ============ menu desktop view ============ */
+    @@media all and (min-width: 992px) {
+
+        .dropdown-menu li {
+            position: relative;
+        }
+        .dropdown-menu .submenu {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: -7px;
+        }
+        .dropdown-menu .submenu-left {
+            right: 100%;
+            left: auto;
+        }
+        .dropdown-menu > li:hover {
+            background-color: #f1f1f1
+        }
+       .dropdown-menu > li:hover > .submenu {
+                display: block;
+       }
+    }
+    /* ============ desktop view .end// ============ */
+
+    /* ============ small devices ============ */
+    @@media (max-width: 991px) {
+
+        .dropdown-menu .dropdown-menu {
+            margin-left: 0.7rem;
+            margin-right: 0.7rem;
+            margin-bottom: .5rem;
+        }
+    }
+    /* ============ small devices .end// ============ */
+
+</style>
+
+
+
+
+
+<div class="d-flex text-muted pt-3">
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-50">
+        <h2>Project grid</h2>
+    </div>
+    <div class="pb-3 mb-0 small lh-sm border-bottom w-50">
+        <div class="d-flex justify-content-end">
+            <ul class="nav">
+
+                <li class="nav-item">
+                    <a class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#createNewProject">
+                        + Create Project
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index"><span class="btn btn-close"></span> </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="px-4 py-1" id="icon-grid">
+
+    @if (Model.Count() < 1)
+    {
+        <div id="no-content-div" class="d-block text-center">
+            <h1>Get started create a Project</h1> <a class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#createNewProject">
+                + Create Project
+            </a>
+            <h3> Having no projects under current Tenant</h3> <br />
+            <h5> You can create project from the top menu on the screen.</h5>
+
+        </div>
+    }
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+        @foreach (var project in Model)
+        {
+
+            <div class="col d-flex align-items-start">
+                <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
+                <div>
+                    <h4 class="fw-bold mb-0">@project.Title</h4>
+                    <p>@project.Summary</p>
+                    <span>@project.Id</span>
+                </div>
+                <div class="flex-shrink-0 dropdown">
+                    <a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu  text-small shadow" aria-labelledby="dropdownUser2">
+                        <li>
+                            <a class="dropdown-item" href="#"> Application &raquo; </a>
+                            <ul class="submenu dropdown-menu">
+
+                                <li>
+                                    <a class="dropdown-item" href="#"> Data Models (Backend DB) &raquo; </a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="DataIndex" asp-route-projectId=@project.Id>Database</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Web Services/ API(s)</a></li>
+                                        <li><a class="dropdown-item" href="#">Data files</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"> User Interface (UI) &raquo; </a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Forms</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Reports</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Dashboards</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"> Reusability (components) &raquo; </a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Apps</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Functions</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Widgets</a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Access and Security &raquo; </a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Users</a>
+                                        </li>
+
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Roles</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Access rights</a>
+                                        </li>
+                                        <li>
+                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Menu</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Interoperability (Integrations) &raquo; </a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Application</a></li>
+                                        <li><a class="dropdown-item" href="#">Email</a></li>
+                                        <li><a class="dropdown-item" href="#">SMS</a></li>
+                                        <li><a class="dropdown-item" href="#">Payment</a></li>
+
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+
+                        <li>
+                            <a class="dropdown-item" href="#"> Business &raquo; </a>
+                            <ul class="submenu dropdown-menu">
+                                <li>
+                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Processes Models</a>
+                                </li>
+                                <li>
+                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>DMN Models</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                      
+                        <li>
+                            <a class="dropdown-item" href="#"> Project &raquo; </a>
+                            <ul class="submenu dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Problem Statement</a></li>
+                                <li><a class="dropdown-item" href="#">The Solution</a></li>
+                                <li><a class="dropdown-item" href="#">Charter</a></li>
+                                <li><a class="dropdown-item" href="#">Phases</a></li>
+                                <li><a class="dropdown-item" href="#">Activities</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Stakeholders &raquo;</a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Stakeholders Matrix</a></li>
+                                    </ul>
+
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Requirements Backlog (FR(s) / NFR(s) &raquo;</a>
+                                    <ul class="submenu dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Functional</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="#">Non Functional</a>
+                                            <ul class="submenu dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Checklist Document</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Project Settings</a></li>
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#remProject" style="color:red">Remove</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                  
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
+@*Projects Management*@
+@* New Project Create Modal *@
+<!-- Modal -->
+<div class="modal fade" id="createNewProject" tabindex="-1" aria-labelledby="createNewProjectLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="project-create" class="row g-3 needs-validation" novalidate>
+
+                    @{
+                        var hubUserId = Context.Session.Get<TenantUserProfileViewModel>("_TenantUserProfile").HubUserId;
+                    }
+                    <input type="hidden" id="hdnHubUserId" value=@hubUserId />
+                   
+                    <div class="col-12">
+                        <label for="inputProjectTitle" class="form-label">Title *</label>
+                        <input type="text" class="form-control" id="inputProjectTitle" placeholder="New Project" required>
+                        <div class="invalid-feedback">
+                            Please enter a project title.
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputProjectSummary" class="form-label">Summary *</label>
+                        <textarea class="form-control" id="inputProjectSummary" placeholder="Project Summary" required> </textarea>
+                        <div class="invalid-feedback">
+                            Please enter a project summary.
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Create</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@* Remove Modal *@
+<!-- Modal -->
+<div class="modal fade" id="remProject" tabindex="-1" aria-labelledby="remProjectLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Project</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="proj-remove" class="row g-3 needs-validation" novalidate>
+                    @{
+                        var tenantId = Context.Session.Get<TenantUserProfileViewModel>("_TenantUserProfile").TenantId;
+                    }
+
+                    <input type="hidden" id="hdnTenantId" value=@tenantId />
+                    <div class="col-12">
+                        <label for="inputProjectTitle" class="form-label">Project Id to be removed*</label>
+                        <input type="text" class="form-control" id="inputProjectId" placeholder="Project Id" required>
+                        <div class="invalid-feedback">
+                            Please enter the project Id to confirm remove project.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Remove</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@* Form Usability *@
+
+<script src="~/project/js/ProjectManager.js" type="module"></script>
+<script src="~/js/multilevelmenu.js" type="text/javascript"></script>
+
+
+<script>
+    var createModal = document.getElementById('createNewProject')
+    var inputProjectTitle = document.getElementById('inputProjectTitle')
+
+    createModal.addEventListener('shown.bs.modal', function () {
+        inputProjectTitle.focus()
+    });
+
+
+</script>
+
+
+
