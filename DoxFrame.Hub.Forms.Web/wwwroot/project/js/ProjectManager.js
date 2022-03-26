@@ -1,10 +1,10 @@
 ﻿
 var _hostUrl = '';
- (function (){
+var _utility = new Utility();
+(function () {
   
     try {
         var _ajaxHelper = new AjaxHelper();
-        var _utility = new Utility();
         _hostUrl = _utility.GetHostUrl();
         var redirectUrl = _hostUrl; 
         var popupTimeOut = 500;
