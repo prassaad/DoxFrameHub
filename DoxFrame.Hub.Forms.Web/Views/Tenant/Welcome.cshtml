@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = "_AccountLayout";
+}
+ 
+<div class="container-fluid">
+
+    <div class="alert alert-dismissible fade show" role="alert" id="divSuccessShow" style="display:none">
+        <p id="alertText"></p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="d-grid text-center py-5" style="grid-template-columns: 1fr 2fr;">
+        <div class="border-end">
+            <div class="px-5 py-5 lh-sm w-100" style="width:180px;">
+                <img src="~/img/logo.png" alt="" width="72" height="57"> <h5 class="fw-normal">DoxFrame Hub</h5>
+            </div>
+            <h2>Welcome to DoxFrame Citizen Development Hub</h2>
+            <p style="text-align:left" !important">
+                Help us to setup your first tenant and start application development.
+            </p>
+        </div>
+        <div>
+            <div class="pb-md-5 mb-0 small lh-sm w-100">
+                <div class="d-flex justify-content-end">
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src=@User.Claims.FirstOrDefault(c => c.Type == "picture")?.Value alt="hub user" width="32" height="32" class="rounded-circle">
+                            @User.Identity.Name
+                        </a>
+                        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sign out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <main class="account-form">
+                <h3>Tenant details</h3><span>A tenant represents an organization in DoxFrame Hub for whom developing applications</span>
+                <div class="mb-0 small lh-sm w-100">
+                    <form id="tenant-create" class="row g-3 needs-validation" novalidate method="post">
+                        <input type="hidden" class="form-control" value=@ViewBag.HubUserId id="hdnHubuserid">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="domainname" placeholder="domain Name" required>
+                            <label for="domainname">Domain name</label>
+                            <div class="invalid-feedback">
+                                Domain name can't be blank
+                            </div>
+                            <p style="text-align:left" !important">
+                                Tenant Name. The Tenant name cant be rename as we will select a doman based on the name.
+                                You can create multiple Tenants in your Account for development needs
+                            </p>
+                        </div>
+                        <div class="form-floating">
+                            <input type="tel" class="form-control" id="region" placeholder="Region" required>
+                            <label for="region">Region</label>
+                            <div class="invalid-feedback">
+                                Region can't be blank
+                            </div>
+                            <p style="text-align:left" !important">
+                                The Region helps to host all of your data US/IND/AU
+                            </p>
+                        </div>
+                        <button class="w-50 btn btn-primary" type="submit">Create Tenant</button>
+                    </form>
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="~/tenant/js/TenantManager.js" type="module"></script>
