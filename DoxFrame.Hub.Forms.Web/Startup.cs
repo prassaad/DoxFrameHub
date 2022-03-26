@@ -113,6 +113,8 @@ namespace DoxFrame.Hub.Web
             app.UseSession();
             app.UseRouting();
 
+            app.UseCors();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
