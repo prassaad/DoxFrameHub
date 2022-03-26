@@ -1,0 +1,12 @@
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\bin\Debug\net5.0\DoxFrameHub.SharedKernel.deps.json
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\bin\Debug\net5.0\DoxFrameHub.SharedKernel.dll
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\bin\Debug\net5.0\ref\DoxFrameHub.SharedKernel.dll
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\bin\Debug\net5.0\DoxFrameHub.SharedKernel.pdb
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.csprojAssemblyReference.cache
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.GeneratedMSBuildEditorConfig.editorconfig
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.AssemblyInfoInputs.cache
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.AssemblyInfo.cs
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.csproj.CoreCompileInputs.cache
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.dll
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\ref\DoxFrameHub.SharedKernel.dll
+E:\BPM\DOXFRAME\DoxFrameHub\DoxFrameHub\src\DoxFrameHub.SharedKernel\obj\Debug\net5.0\DoxFrameHub.SharedKernel.pdb

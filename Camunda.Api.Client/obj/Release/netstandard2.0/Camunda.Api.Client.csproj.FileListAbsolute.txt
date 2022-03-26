@@ -1,0 +1,12 @@
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\bin\Release\netstandard2.0\Camunda.Api.Client.deps.json
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\bin\Release\netstandard2.0\Camunda.Api.Client.dll
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\bin\Release\netstandard2.0\Camunda.Api.Client.pdb
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\bin\Release\netstandard2.0\Camunda.Api.Client.xml
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.csprojAssemblyReference.cache
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\RefitStubs.g.cs
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.AssemblyInfoInputs.cache
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.AssemblyInfo.cs
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.csproj.CoreCompileInputs.cache
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.dll
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.xml
+E:\BPM\DOXFRAME\DoxFrame.Hub\Camunda.Api.Client\obj\Release\netstandard2.0\Camunda.Api.Client.pdb

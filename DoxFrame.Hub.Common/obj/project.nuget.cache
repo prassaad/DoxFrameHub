@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "+ylSD+3qmhkl1tOavlC9Oiv4ppHm5y53XLnQwUKVQrS9wCzO8es/+1bpt4HuM6TYHwaFxYr2rtUGMO2fj6xSow==",
+  "success": true,
+  "projectFilePath": "E:\\BPM\\DOXFRAME\\DoxFrame.Hub\\DoxFrame.Hub.Common\\DoxFrame.Hub.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Hp\\.nuget\\packages\\ardalis.guardclauses\\3.2.0\\ardalis.guardclauses.3.2.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\ardalis.result\\3.1.1\\ardalis.result.3.1.1.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\ardalis.specification\\5.1.0\\ardalis.specification.5.1.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\autofac\\6.2.0\\autofac.6.2.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\jetbrains.annotations\\2021.1.0\\jetbrains.annotations.2021.1.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
+    "C:\\Users\\Hp\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.7.1\\system.diagnostics.diagnosticsource.4.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}

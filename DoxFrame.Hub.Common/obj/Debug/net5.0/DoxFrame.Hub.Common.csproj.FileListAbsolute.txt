@@ -1,0 +1,12 @@
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\bin\Debug\net5.0\DoxFrame.Hub.Common.deps.json
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\bin\Debug\net5.0\DoxFrame.Hub.Common.dll
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\bin\Debug\net5.0\ref\DoxFrame.Hub.Common.dll
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\bin\Debug\net5.0\DoxFrame.Hub.Common.pdb
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.AssemblyInfoInputs.cache
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.AssemblyInfo.cs
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.csproj.CoreCompileInputs.cache
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.dll
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\ref\DoxFrame.Hub.Common.dll
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.pdb
+E:\BPM\DOXFRAME\DoxFrame.Hub\DoxFrame.Hub.Common\obj\Debug\net5.0\DoxFrame.Hub.Common.csprojAssemblyReference.cache
