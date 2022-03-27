@@ -34,22 +34,17 @@
 
 
 <ul class="nav justify-content-end border border-1">
-    <li class="nav-item">
+   
+    @*<li class="nav-item">
         <a class="nav-link">
             <span class="text-dark align-text-bottom">
                 Project : @ViewBag.ProjectTitle
             </span>
         </a>
-    </li>
+    </li>*@
 
-    <li class="nav-item">
-        <a class="nav-link">
-            <span class="text-dark align-text-bottom">
-                Form : @ViewBag.FormTitle
-            </span>
-        </a>
-    </li>
-    <button type="button" class="btn" id="copy-to-storage"><img src="/forms/icons/plus-circle.svg" alt="" width="24" height="24"></button>
+
+    @*<button type="button" class="btn" id="copy-to-storage"><img src="/forms/icons/plus-circle.svg" alt="" width="24" height="24"></button>*@
     <button type="button" class="btn" id="open-to-storage"><img src="/forms/icons/folder2-open.svg" alt="" width="24" height="24"></button>
     <button type="button" class="btn" id="copy-to-file"><img src="/forms/icons/save.svg" alt="" width="24" height="24"></button>
     <li class="nav-item">
@@ -84,6 +79,8 @@
 @* This can be used for save form layout to local *@
 <input id="file-input" type="file" name="name" style="display: none;" />
 <div class="my-1 p-1 bg-body rounded shadow-sm">
+  
+      
     <div class="row">
         <div class="col-md-2" style="padding: 0px 30px 30px 30px; background-color: #fff;">
 
@@ -136,12 +133,17 @@
         </div>
 
         <div class='header col-md-10'>
+
+            <h5 class="text-dark align-text-bottom">
+                Title: @ViewBag.FormTitle
+            </h5>
             <div style="background-color: #fff; border-radius: 5px; padding: 20px;
 						box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); ">
                 <div id="viewer" class="col-md-12" style="display: none;"></div>
                 <div class="row form-body">
 
-                    <div id="canvas" style="background-image: radial-gradient(circle, #ddd 1px, rgba(0,0,0,0) 1px);background-size: 1rem 1rem;" class="col-md-12 form-horizontal droppable sortable">
+                    <div id="canvas" style="background-image: radial-gradient(circle, #ddd 1px, rgba(0,0,0,0) 1px);background-size: 1rem 1rem;"
+                         class="col-md-12 form-horizontal droppable sortable">
                         <div id="no-content-div" class="d-block text-center">
                             <h3>Design @ViewBag.FormTitle Form</h3> <br />
                             <h5> You can drag & drop UI components from the left menu on the  screen.</h5>

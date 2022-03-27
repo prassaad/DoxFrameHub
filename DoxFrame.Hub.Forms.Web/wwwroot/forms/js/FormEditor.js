@@ -2,8 +2,8 @@
 import * as FilterComponent from '../js/FilterComponent.js';
  
  var canvas= "#canvas";
- var tools = '<div class="col-md-3"><p class="tools">\
-						<a class="edit-link">Edit<a> | \
+var tools = '<div class="col-md-3"><p class="tools" style="margin-top: 9px;">\
+				        <br /><a class="edit-link">Edit<a> | \
 						<a class="remove-link">X</a></p> </div>\
 						</div > ';
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
 
 	var _utility = new Utility();
 	_hostUrl = _utility.GetHostUrl();
-	alert(_hostUrl);
+	 //alert(_hostUrl);
 	_frmProjectId = $("#hdnProjectId").val();
 	_frmFormId = $("#hdnFormId").val();
 	_frmProjectTitle = $("#hdnProjectTitle").val();
@@ -489,54 +489,52 @@ function renderForm() {
             });
         }
     } 
-	function renderDropDown(filter, currentFilters){
-		var combo = "";
-        var dropDownList = "";
-        var controlDiv = $(`<div class="col-sm-6"></div>`);
-		var parent = $(`<div  id=${filter.Key} class="mb-3 row"><label class="col-sm-3 control-label" for="${filter.Name}">${filter.Name}</label></div>`);
-	
-			combo = $(`<select disabled id="ddl_${filter.Name}" class="form-control js_DynamicElement js_remove_${filter.Name}"></select>`)
+function renderDropDown(filter, currentFilters) {
+	var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+	var col = $(`<div class="col-md-5"></div>`);
+	var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+	var combo = $(`<select disabled id="ddl_${filter.Name}" class="form-control js_remove_${filter.Name}"></select>`)
                 .attr("data-eleType", "DropDown")
                 .attr("filter", filter).attr("name", filter.Name);
-            combo.append(`<option value="">-- Select ${filter.Name} --</option>`);
-            controlDiv.append(combo);
-			parent.append(controlDiv).append(tools);
-			
-			$("#canvas").append(parent);
+        combo.append(`<option value="">-- Select ${filter.Name} --</option>`);
+		col.append(label);
+		col.append(combo);
+		row.append(col).append(tools);
+		$("#canvas").append(row);
 	}
-    function renderTextBox (filter, currentFilters) {
-		var textBox="";
-		var controlDiv = $(`<div class="col-sm-6"></div>`);
-		var parent = $(`<div id=${filter.Key} class="mb-3 row"><label class="col-sm-3 control-label" for="${filter.Name}">${filter.Name}</label></div>`);
-		
-		textBox = $(`<input disabled type="text" data-eleType="TextBox"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
-        controlDiv.append(textBox);
-		parent.append(controlDiv).append(tools);
-        
-        $("#canvas").append(parent);
-    }
-	 function renderDate (filter, currentFilters) {
-		var date="";
-		var controlDiv = $(`<div class="col-sm-6"></div>`);
-		 var parent = $(`<div id=${filter.Key} class="mb-3 row"><label class="col-sm-3 control-label" for="${filter.Name}">${filter.Name}</label></div>`);
-		
-		date = $(`<input disabled type="date" data-eleType="Date" class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
-        controlDiv.append(date);
-		parent.append(controlDiv).append(tools);
-        
-        $("#canvas").append(parent);
-    }
-   	 function renderCheckBox (filter, currentFilters) {
-		var checkbox="";
-		var controlDiv = $(`<div class="col-sm-6"></div>`);
-			   var parent = $(`<div id=${filter.Key} class="mb-3 row form-check"><label class="col-sm-3 control-label" for="${filter.Name}"></label></div>`);
-		
-		checkbox = $(`<input disabled type="checkbox" data-eleType="CheckBox"s class="form-check-input js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/><label class="form-check-label" for="${filter.Name}">&nbsp;${filter.Name}</label>`);
-        controlDiv.append(checkbox);
-		parent.append(controlDiv).append(tools);
-        
-        $("#canvas").append(parent);
-    }
+function renderTextBox(filter, currentFilters) {
+
+	var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+	var col = $(`<div class="col-md-5"></div>`);
+	var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+	var textBox = $(`<input disabled type="text" data-eleType="TextBox"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+	col.append(label);
+	col.append(textBox);
+	row.append(col).append(tools);
+	$("#canvas").append(row);
+
+  }
+
+function renderDate(filter, currentFilters) {
+ 		var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+		var col = $(`<div class="col-md-5"></div>`);
+		var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+ 		var date = $(`<input disabled type="date" data-eleType="Date" class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+		col.append(label);
+	    col.append(date);
+		row.append(col).append(tools);
+		$("#canvas").append(row)
+}
+  function renderCheckBox (filter, currentFilters) {
+		var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+		var col = $(`<div class="col-md-5"></div>`);
+		var label = `<label class="form-check-label" for="${filter.Name}">&nbsp;${filter.Name}</label>`;
+		var checkbox = $(`<input disabled type="checkbox" data-eleType="CheckBox"s class="form-check-input js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+		col.append(checkbox);
+		col.append(label);
+		row.append(col).append(tools);
+		$("#canvas").append(row)
+  }
    
 	
    
