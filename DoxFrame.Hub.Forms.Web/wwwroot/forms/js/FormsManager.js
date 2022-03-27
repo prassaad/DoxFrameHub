@@ -1,10 +1,10 @@
 ﻿
 var _hostUrl = '';
+var _utility = new Utility();
 (function () {
 
     try {
         var _ajaxHelper = new AjaxHelper();
-        var _utility = new Utility();
         var projectId = $('#hdnProjId').val(); 
         var modalDialog = document.getElementById('createNewForm');
         _hostUrl = _utility.GetHostUrl();
@@ -140,6 +140,7 @@ var _hostUrl = '';
              _utility.toggleSpinner(true);
             var postData = getFormUpdatedData();
             try {
+                //alert(_hostUrl + "api/Forms/update");
                 var response = await _ajaxHelper.postDataAsync(_hostUrl + "api/Forms/update", postData);
                 if (response.success) {
                     //alert('Form updated successfully');

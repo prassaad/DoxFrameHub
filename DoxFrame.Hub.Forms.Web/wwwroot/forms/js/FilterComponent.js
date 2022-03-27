@@ -86,12 +86,20 @@ var FilterComponent = {
     BindDropDown: function (filter, currentFilters) {
  		//var hostURL = "http://localhost:8003/";//_ajaxHelper.GetApiUrl(filter.AreaName);
         //#region Binding main DropDown
-        var combo = "";
-        var dropDownList = "";
-        var controlDiv = $(`<div class="col-sm-7"></div>`);
-        var parent = $(`<div class="form-group"><label class="col-sm-3 control-label" for="${filter.Name}">${filter.Name}</label></div>`);
-         
-        if (filter.ClientControl.ClientContorlSource.SourceType === "OData") {
+
+
+        var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+        var col = $(`<div class="col-md-5"></div>`);
+        var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+        var combo = $(`<select disabled id="ddl_${filter.Name}" class="form-control js_remove_${filter.Name}"></select>`)
+            .attr("data-eleType", "DropDown")
+            .attr("filter", filter).attr("name", filter.Name);
+        //combo.append(`<option value="">-- Select ${filter.Name} --</option>`);
+        col.append(label);
+  
+
+        // In case property api        
+        if (filter.ClientControl.ClientContorlSource.SourceType === "Api") {
             $.ajax({
                 'async': false,
                 url: `${filter.ClientControl.ClientContorlSource.ODataClientRequest.ODataURL}`,
@@ -100,7 +108,7 @@ var FilterComponent = {
                 dataType: "json",
                 success: function (response) {
                     if (response !== null && response !== undefined && response !== "") {
-                        dropDownList = response;// response.value; // response.records;
+                        var dropDownList = response;// response.value; // response.records;
                         combo = $(`<select id="ddl_${filter.Name}" class="form-control js_DynamicElement js_remove_${filter.Name}"></select>`)
                             .attr("data-eleType", "DropDown")
                             .attr("filter", filter).attr("name", filter.Name)
@@ -113,8 +121,7 @@ var FilterComponent = {
 								combo.append(`<option value="${el[filter.ClientControl.SourceField]}">${el[filter.ClientControl.DisplayField]}</option>`);
 							});
 						}
-                        //controlDiv.prepend(`<label class="control-label" for="${filter.Name}">${filter.Name}</label>`);;
-                        controlDiv.append(combo);
+                        col.append(combo);
                     }
                 },
                 error: function (response) {
@@ -125,9 +132,17 @@ var FilterComponent = {
 		else if(filter.ClientControl.ClientContorlSource.SourceType === "Static"){
 
 				//Get the fixed date values data from json 
-            var listText = '';//this.GetAraryFromString(filter.ClientControl.ClientContorlSource.FixedFields);
-            var listValues = '';// this.GetAraryFromString(filter.ClientControl.ClientContorlSource.FixedValues);
-				
+            var listText = '';
+            var listValues = '';
+		    // validate the data values in fields
+
+             
+            if (filter.ClientControl.ClientContorlSource.FixedFields.length > 0 || filter.ClientControl.ClientContorlSource.FixedValues > 0) {
+                listText = this.GetAraryFromString(filter.ClientControl.ClientContorlSource.FixedFields);
+                listValues = this.GetAraryFromString(filter.ClientControl.ClientContorlSource.FixedValues);
+            }
+
+
 				 combo = $(`<select id="ddl_${filter.Name}" class="form-control js_DynamicElement js_remove_${filter.Name}"></select>`)
                 .attr("data-eleType", "DropDown")
                 .attr("filter", filter).attr("name", filter.Name)
@@ -137,7 +152,7 @@ var FilterComponent = {
 				for (var i = 0; i < listText.length; i++) {
 				   combo.append(`<option value="${listValues[i]}">${listText[i]}</option>`);
 				}
-				controlDiv.append(combo);
+				col.append(combo);
 		
          } else if (filter.ClientControl.ClientContorlSource.SourceType === "File") {
             //Get the static data from StandardData
@@ -153,10 +168,10 @@ var FilterComponent = {
             $.each(dropdownList, function (i, el) {
                 combo.append(`<option value="${el.name}">${el.displayname}</option>`);
             });
-            controlDiv.append(combo);
+            col.append(combo);
         }  
-        parent.append(controlDiv);
-        $(filter.ClientControl.ParentIdentifier).append(parent);
+        row.append(col);
+        $(filter.ClientControl.ParentIdentifier).append(row);
     },
 	BindCascadeDropDown: function (filter, currentFilters) {
 		// on select cascade affect call back
@@ -166,7 +181,7 @@ var FilterComponent = {
 		var combo = $(`#ddl_${filter.Name}`)
 		combo.empty(); 
 		var dropDownList = "";    
-        if (filter.ClientControl.ClientContorlSource.SourceType === "OData") {
+        if (filter.ClientControl.ClientContorlSource.SourceType === "Api") {
             alert(filter.ClientControl.ClientContorlSource.ODataClientRequest.ODataURL);
             $.ajax({
                 'async': false,
@@ -192,23 +207,25 @@ var FilterComponent = {
 
     },
     BindTextBox: function (filter, currentFilters) {
-		var controlDiv = $(`<div class="col-sm-7"></div>`);
-        var parent = $(`<div class="form-group"><label class="col-sm-3 control-label" for="${filter.Name}">${filter.Name}</label></div>`);
-        if (filter !== undefined && filter !== null && filter !== "") {
-            var textBox = $(`<input type="text" data-eleType="TextBox" class="form-control js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
-            controlDiv.append(textBox);
-			parent.append(controlDiv);
-            $(filter.ClientControl.ParentIdentifier).append(parent);
+        var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+        var col = $(`<div class="col-md-5"></div>`);
+        var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+         if (filter !== undefined && filter !== null && filter !== "") {
+             var textBox = $(`<input type="text" data-eleType="TextBox"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+             col.append(label);
+             col.append(textBox);
+             row.append(col)
+             $(filter.ClientControl.ParentIdentifier).append(row);
         }
     },
     BindDate: function (filter, currentFilters) {
-		
-		var date="";
-		var controlDiv = $(`<div class="col-sm-7"></div>`);
-        var parent = $(`<div id=${filter.Key} class="form-group"><label class="col-sm-3 control-label" for="${filter.Name}">${filter.Name}</label></div>`);
 
+
+        var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+        var col = $(`<div class="col-md-5"></div>`);
+        var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+        var date = $(`<input disabled type="date" data-eleType="Date" class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
         if (filter !== undefined && filter !== null && filter !== "") {
-         
 			/* date = $(`<div id="divDate_${filter.Key}" class="input-group field-with-icon date"><input type="date" id="txtDate_${filter.Key}" data-eleType="Date" class="form-control js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}"  filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}' /><a href="#" class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></a></div>
 			<script type="text/javascript">
 					$(function () {
@@ -227,24 +244,28 @@ var FilterComponent = {
 					});
 			</script>`); */
 			
-			date = $(`<input type="date" id="txtDate_${filter.Key}" data-eleType="Date" class="form-control js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}" placeholder="dd-mm-yyyy" value=""
+	    date = $(`<input type="date" id="txtDate_${filter.Key}" data-eleType="Date" class="form-control js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}" placeholder="dd-mm-yyyy" value=""
         min="1997-01-01" max="2030-12-31" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}' />`);
-            
-			controlDiv.append(date);
-			parent.append(controlDiv);
-            $(filter.ClientControl.ParentIdentifier).append(parent);
+
+         col.append(label);
+         col.append(date);
+         row.append(col) 
+         $(filter.ClientControl.ParentIdentifier).append(row);
         }
     },
     BindCheckBox: function (filter, currentFilters) {
-		var checkbox="";
-		var controlDiv = $(`<div class="col-sm-6"></div>`);
-        var parent = $(`<div id=${filter.Key} class="form-group form-check"><label class="col-sm-3 control-label" for="${filter.Name}"></label></div>`);
-		if (filter !== undefined && filter !== null && filter !== "") {
-				checkbox = $(`<input type="checkbox" data-eleType="CheckBox"s class="form-check-input js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/><label class="form-check-label" for="${filter.Name}">&nbsp;${filter.Name}</label>`);
-				
-				controlDiv.append(checkbox);
-				parent.append(controlDiv);
-			 $(filter.ClientControl.ParentIdentifier).append(parent);
+
+        var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+        var col = $(`<div class="col-md-5"></div>`);
+  
+ 		if (filter !== undefined && filter !== null && filter !== "") {
+	            var label = `<label class="form-check-label" for="${filter.Name}">&nbsp;${filter.Name}</label>`;
+                var checkbox = $(`<input  type="checkbox" data-eleType="CheckBox"s class="form-check-input js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+                col.append(checkbox);
+                col.append(label);
+                row.append(col);
+                $(filter.ClientControl.ParentIdentifier).append(row);
+
 		}
     },
     ChangeEvent: function (props) {
@@ -252,7 +273,7 @@ var FilterComponent = {
             case "DropDown":
 				{
                     if (props.Value !== "0" && props.Value !== undefined && props.Value !== null) {
-                        if (props.currentFilterJson.ClientControl.ClientContorlSource.SourceType === "OData" || props.currentFilterJson.ClientControl.ClientContorlSource.SourceType === "Html")
+                        if (props.currentFilterJson.ClientControl.ClientContorlSource.SourceType === "Api" || props.currentFilterJson.ClientControl.ClientContorlSource.SourceType === "Static")
                             props.Value = parseInt(props.Value);
                         FilterComponent.CreateFilterArray(props);
                     } else {
@@ -355,8 +376,8 @@ var FilterComponent = {
         generatedFilters = [];
         generatedFilters.push(...existingfilters);
     },
-	GetAraryFromString: function(strValues){
-		return  strValues.split(",");
+    GetAraryFromString: function (strValues) {
+         return strValues.split(",");
 	}
 };
 
@@ -444,7 +465,7 @@ var FilterComponent = {
         });
         //#endregion
     } catch (error) {
-        console.log(error);
+        console.log();
     } finally {
         console.log("error");
     }
