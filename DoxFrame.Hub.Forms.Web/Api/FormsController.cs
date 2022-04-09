@@ -32,6 +32,26 @@ namespace DoxFrame.Hub.Web.Api
 
             return Ok(form);
         }
+        // GET: api/Forms
+        [HttpGet("{projectId:Guid}/{formId}/FormLayout")]
+        public async Task<IActionResult> GetFormLayoutById(Guid projectId, Guid formId)
+        {
+            var projectSpec = new ProjectByIdWithItemsSpec(projectId);
+            var project = await _repository.GetBySpecAsync(projectSpec);
+            if (project == null) return NotFound("No such project");
+
+            var form = project.Forms.FirstOrDefault(form => form.Id == formId);
+            if (form == null) return NotFound("No such form.");
+
+           
+              // get encode fromLayout design to Json
+             var formsRepo = new DoxFrame.Hub.Core.Services.FormsRepository(_repository);
+             var formLayout = (string)formsRepo.FormLayoutToJson(form.Layout);
+
+
+            //return Json(new { layout = formLayout });
+            return Ok(formLayout);
+        }
 
         // POST: api/Forms
         [HttpPost("create")]

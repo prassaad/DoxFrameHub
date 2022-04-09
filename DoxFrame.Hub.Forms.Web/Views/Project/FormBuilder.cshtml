@@ -82,14 +82,26 @@
   
       
     <div class="row">
-        <div class="col-md-2" style="padding: 0px 30px 30px 30px; background-color: #fff;">
+        <div class="col-md-2" style="padding: 0px 30px 30px 30px; background-color: #fff;" >
 
-            <h3>Elements</h3>
+            <h3>Fields</h3>
             <form role="form">
                 <div class="mb-3 row draggable">
                     <div class="field" id="input-text-1">
                         <img src="/forms/icons/Textfield.svg" width="40" alt="">
                         <span id="TextBox">Text Box</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="input-text-2">
+                        <img src="/forms/icons/envelope.svg" width="40" alt="">
+                        <span id="Email">Email</span>
+                    </div>
+                </div>
+                <div class="mb-3 row draggable">
+                    <div class="field" id="input-text-3">
+                        <img src="/forms/icons/Textarea.svg" width="40" alt="">
+                        <span id="TextArea">Text Area</span>
                     </div>
                 </div>
                 <div class="mb-3 row draggable">
@@ -142,9 +154,13 @@
                 <div id="viewer" class="col-md-12" style="display: none;"></div>
                 <div class="row form-body">
 
-                    <div id="canvas" style="background-image: radial-gradient(circle, #ddd 1px, rgba(0,0,0,0) 1px);background-size: 1rem 1rem;"
+                    <div id="canvas" style=" background-image: radial-gradient(circle, #ddd 1px, rgba(0,0,0,0) 1px);
+                        background-size: 1rem 1rem;
+                        margin: auto;
+                        width: 60%;
+"
                          class="col-md-12 form-horizontal droppable sortable">
-                        <div id="no-content-div" class="d-block text-center">
+                        <div id="no-content-div" class="d-block text-center" >
                             <h3>Design @ViewBag.FormTitle Form</h3> <br />
                             <h5> You can drag & drop UI components from the left menu on the  screen.</h5>
                         </div>
