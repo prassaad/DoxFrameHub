@@ -1,0 +1,95 @@
+﻿<link rel="stylesheet" href="~/bpmn-js/vendor/bpmn-js/assets/diagram-js.css" />
+<link rel="stylesheet" href="~/bpmn-js/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
+<link rel="stylesheet" href="~/bpmn-js/vendor/bpmn-js-properties-panel/assets/properties-panel.css" />
+
+<ul class="nav justify-content-end border border-1">
+    <li class="nav-item">
+        <a class="nav-link">
+            <span class="text-dark align-text-bottom">
+                Project :  @ViewBag.ProjectTitle
+            </span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link">
+            <span class="text-dark align-text-bottom">
+                Process :  @ViewBag.ProcessTitle
+            </span>
+        </a>
+    </li>
+
+
+    <li class="nav-item">
+        <a id="js-download-diagram" class="nav-link active" href="#" title="download BPMN diagram">
+            BPMN diagram
+        </a>
+    </li>
+    <li class="nav-item">
+        <a id="js-download-svg" class="nav-link active" href="#" title="download as SVG image">
+            SVG image
+        </a>
+    </li>
+
+    <button type="button" class="btn" id="save-to-db"><img src="/forms/icons/save-to-db.svg" alt="" width="24" height="24"></button>
+
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@ViewBag.ProjectId><span class="btn btn-close"></span> </a>
+    </li>
+</ul>
+
+<div style="height:500px !important; background-image: radial-gradient(circle, #ddd 1px, rgba(0,0,0,0) 1px);background-size: 1rem 1rem;">
+
+
+    <div class="content" id="js-drop-zone">
+
+        <div class="message intro">
+            <div class="note">
+                Drop BPMN diagram from your desktop or <a id="js-create-diagram" href>create a new diagram</a>to get started.
+            </div>
+        </div>
+
+        <div class="message error">
+            <div class="note">
+                <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
+
+                <div class="details">
+                    <span>cause of the problem</span>
+                    <pre></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas" id="js-canvas"></div>
+        <div id="js-properties-panel"></div>
+    </div>
+</div>
+
+
+<input type="hidden" id="hdnProjectId" value="@ViewBag.ProjectId" />
+<input type="hidden" id="hdnProcessId" value=@ViewBag.ProcessId />
+<input type="hidden" id="hdnProcessKey" value=@ViewBag.ProcessKey />
+<input type="hidden" id="hdnProjectTitle" value="@ViewBag.ProjectTitle" />
+<input type="hidden" id="hdnProcessTitle" value=@ViewBag.ProcessTitle />
+
+
+@if (ViewBag.Layout == "New")
+{
+    <input type="hidden" id="hdnHasLayout" value="0" />
+}
+else
+{
+    <input type="hidden" id="hdnHasLayout" value="1" />
+}
+
+@* Set Form Layout Json directly to local storage rather  set to a filed to miss data*@
+<script type="text/javascript">
+
+    localStorage['@ViewBag.ProcessId'] = '@ViewBag.Layout';
+    localStorage['cur-process-key'] = '@ViewBag.ProcessId';
+
+</script>
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/bpmn-js/BPMNEditor.js"></script>
+<script src="~/bpmn-js/index.js"></script>

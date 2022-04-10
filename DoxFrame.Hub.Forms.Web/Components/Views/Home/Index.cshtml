@@ -1,0 +1,45 @@
+﻿
+@{ ViewData["Title"] = "Index"; }
+
+<div class="px-5 py-5" id="icon-grid">
+
+    @if (ViewBag.TotalProjects < 1)
+    {
+<div id="no-content-div" class="d-block text-center">
+    <h1>Get started create a Project</h1>
+    <h3> There are no projects under current Tenant</h3> <br />
+
+    <a class="btn btn-primary" asp-area="" asp-controller="Project" asp-action="Index"> + Create Project</a>
+
+</div> }
+            else
+            {
+<div id="no-content-div" class="d-block text-center">
+    <h5>
+        <a asp-area="" asp-controller="Project" asp-action="Index">No. of application(s). in development @ViewBag.TotalProjects </a> <br />
+        <a href="#">No. of live application(s). @ViewBag.TotalProjects </a>  <br />
+        <a href="#">No. of Hub logins (by citizen development) @ViewBag.TotalProjects </a>  <br />
+        <a href="#">No. of integrations with other Apps. @ViewBag.TotalProjects </a>  <br />
+        <a href="#">No. of reusable componenets used @ViewBag.TotalProjects </a>  <br />
+    </h5>
+
+   
+
+</div>}
+</div>
+
+ 
+
+
+@*<script src="~/forms/js/jquery.min.js" type="text/javascript"></script>*@
+@*<script src="~/forms/js/DoxFrameFormViewer.js" type="text/javascript"></script>*@
+@*<script>
+
+        $("div").greenify({
+            color: "green"
+            url: 'http://server'
+        });
+
+    </script>*@
+
+
