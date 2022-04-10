@@ -132,22 +132,17 @@ $(document).ready(function () {
 			helper: "clone",
 			hoverClass: "droppable-active",
 			drop: function( event, ui ) {
-				 
 			    //var $modal = get_modal("Some").modal("show");
 				$(".empty-form").remove();
 				revert: true;
 				var this_id = $(ui.draggable).attr("id");
-	 			
 				var $orig = $(ui.draggable)
-				//alert($orig);
-				
 				if(!$(ui.draggable).hasClass("dropped")) {
 					var $el = $orig
 						.clone()
 						.addClass("dropped")
 						.css({"position": "static", "left": null, "right": null});
-						
-						
+
 					// field type
 					var fieldType= $orig.find("span").attr("id");
 					 
@@ -160,8 +155,6 @@ $(document).ready(function () {
 					renderCanvas();
 					// Render Form view
 					renderForm();
-					  
-				 
 					 
 				} else {
 					if($(this)[0]!=$orig.parent()[0]) {
@@ -174,6 +167,15 @@ $(document).ready(function () {
 				}
 			}
 		}).sortable();
+
+		$(".droppable").sortable({
+			update: function (event, ui) {
+				alert('')
+				// Set back the form state
+				sortFields() 
+
+			}
+		});
 		
 	}
 function SetformToLocalStore(formKey, hdnHasLayout) {
@@ -263,6 +265,21 @@ function SetformToLocalStore(formKey, hdnHasLayout) {
 			renderCanvas();
         }
 	}
+
+// Sort Order fields
+function sortFields() {
+	var documentJson = getFormState();
+	if (documentJson !== null && documentJson !== "" && documentJson !== undefined) {
+		var items = documentJson.ODataClientFilter.ClientFilterRows[0].ClientFilters;
+		 
+		var frmState = getFormState();
+		frmState.ODataClientFilter.ClientFilterRows[0].ClientFilters = "";
+		frmState.ODataClientFilter.ClientFilterRows[0].ClientFilters = items;
+		//Set back form state
+		setFormState(frmState)
+		renderCanvas();
+	}
+}
 
 	
 $(document).on("change", ".mb-3.row input[type='text']", function(ev) {
@@ -386,7 +403,7 @@ $(document).on("change", ".mb-3.row input[type='text']", function(ev) {
 
    function getFieldSelector(fieldType){
 		var selector;
-		if(fieldType=="TextBox")
+	   if (fieldType == "TextBox" || fieldType == "TextArea" || fieldType == "Email" )
 			selector =".js_textBoxArea";
 		if(fieldType=="DropDown")
 			selector =".js_dropDownArea";
@@ -394,7 +411,8 @@ $(document).on("change", ".mb-3.row input[type='text']", function(ev) {
 			selector =".js_dateArea";
 		if(fieldType=="CheckBox")
 			selector =".js_chkBoxArea";
-	 	
+	   if (fieldType == "Submit")
+		   selector = ".js_buttonArea";
 		return selector;
    }
    
@@ -475,13 +493,22 @@ function renderForm() {
                                 break;
                             case "TextBox":
                                 renderTextBox(filter, obj.ClientFilters);
-                                break;
+								break;
+							case "Email":
+								renderEmail(filter, obj.ClientFilters);
+								break;
+							case "TextArea":
+								renderTextArea(filter, obj.ClientFilters);
+								break;
                             case "Date":
                                 renderDate(filter, obj.ClientFilters);
                                 break;
                              case "CheckBox":
                                 renderCheckBox(filter, obj.ClientFilters);
-                                break; 
+								break;
+							case "Submit":
+								renderSubmitButton(filter, obj.ClientFilters);
+								break;
                             default :
                         }
                     });
@@ -491,7 +518,7 @@ function renderForm() {
     } 
 function renderDropDown(filter, currentFilters) {
 	var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
-	var col = $(`<div class="col-md-5"></div>`);
+	var col = $(`<div class="col-md-9"></div>`);
 	var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
 	var combo = $(`<select disabled id="ddl_${filter.Name}" class="form-control js_remove_${filter.Name}"></select>`)
                 .attr("data-eleType", "DropDown")
@@ -505,7 +532,7 @@ function renderDropDown(filter, currentFilters) {
 function renderTextBox(filter, currentFilters) {
 
 	var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
-	var col = $(`<div class="col-md-5"></div>`);
+	var col = $(`<div class="col-md-9"></div>`);
 	var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
 	var textBox = $(`<input disabled type="text" data-eleType="TextBox"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
 	col.append(label);
@@ -513,11 +540,34 @@ function renderTextBox(filter, currentFilters) {
 	row.append(col).append(tools);
 	$("#canvas").append(row);
 
-  }
+}
+function renderEmail(filter, currentFilters) {
 
+	var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+	var col = $(`<div class="col-md-9"></div>`);
+	var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+	var email = $(`<input disabled type="email" data-eleType="Email"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+	col.append(label);
+	col.append(email);
+	row.append(col).append(tools);
+	$("#canvas").append(row);
+
+}
+function renderTextArea(filter, currentFilters) {
+
+	var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
+	var col = $(`<div class="col-md-9"></div>`);
+	var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+	var textarea = $(`<TextArea disabled type="text" data-eleType="TextArea"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+	col.append(label);
+	col.append(textarea);
+	row.append(col).append(tools);
+	$("#canvas").append(row);
+
+}
 function renderDate(filter, currentFilters) {
  		var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
-		var col = $(`<div class="col-md-5"></div>`);
+		var col = $(`<div class="col-md-9"></div>`);
 		var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
  		var date = $(`<input disabled type="date" data-eleType="Date" class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
 		col.append(label);
@@ -525,16 +575,26 @@ function renderDate(filter, currentFilters) {
 		row.append(col).append(tools);
 		$("#canvas").append(row)
 }
-  function renderCheckBox (filter, currentFilters) {
+function renderCheckBox (filter, currentFilters) {
 		var row = $(`<div  id=${filter.Key} class="row p-1"></div>`);
-		var col = $(`<div class="col-md-5"></div>`);
+		var col = $(`<div class="col-md-9"></div>`);
 		var label = `<label class="form-check-label" for="${filter.Name}">&nbsp;${filter.Name}</label>`;
 		var checkbox = $(`<input disabled type="checkbox" data-eleType="CheckBox"s class="form-check-input js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
 		col.append(checkbox);
 		col.append(label);
 		row.append(col).append(tools);
 		$("#canvas").append(row)
-  }
-   
+}
+function renderSubmitButton(filter, currentFilters) {
+	var row = $(`<div  id=${filter.Key} class="row clearfix"></div>`);
+	var col = $(`<div class="col-md-9 align-self-end"></div>`);
+	//var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
+	var btnSubmit = $(`<button disabled type="submit" data-eleType="submit"s class="btn btn-secondary float-end js_remove_${filter.Name}" name="${filter.Name}" id="btn_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>${filter.Name}</button>`);
+	//col.append(label);
+	col.append(btnSubmit);
+	row.append(col).append(tools);
+	$("#canvas").append(row);
+
+}   
 	
    

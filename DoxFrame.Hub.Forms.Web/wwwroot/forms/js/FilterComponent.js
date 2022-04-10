@@ -211,7 +211,7 @@ var FilterComponent = {
         var col = $(`<div class="col-md-5"></div>`);
         var label = `<label class="form-label" for="${filter.Name}">${filter.Name}</label>`;
          if (filter !== undefined && filter !== null && filter !== "") {
-             var textBox = $(`<input type="text" data-eleType="TextBox"s class="form-control js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+             var textBox = $(`<input type="text" data-eleType="TextBox"s class="form-control  js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}" id="txt_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
              col.append(label);
              col.append(textBox);
              row.append(col)
@@ -260,7 +260,7 @@ var FilterComponent = {
   
  		if (filter !== undefined && filter !== null && filter !== "") {
 	            var label = `<label class="form-check-label" for="${filter.Name}">&nbsp;${filter.Name}</label>`;
-                var checkbox = $(`<input  type="checkbox" data-eleType="CheckBox"s class="form-check-input js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
+                var checkbox = $(`<input  type="checkbox" data-eleType="CheckBox"s class="form-check-input js_DynamicElement js_remove_${filter.Name}" name="${filter.Name}" id="chk_${filter.Name}" filterJson='${JSON.stringify(filter)}' currentFilterList='${JSON.stringify(currentFilters)}'/>`);
                 col.append(checkbox);
                 col.append(label);
                 row.append(col);
@@ -269,7 +269,7 @@ var FilterComponent = {
 		}
     },
     ChangeEvent: function (props) {
- 		switch (props.currentFilterJson.ClientControl.ControlType) {
+        switch (props.currentFilterJson.ClientControl.ControlType) {
             case "DropDown":
 				{
                     if (props.Value !== "0" && props.Value !== undefined && props.Value !== null) {
@@ -443,7 +443,6 @@ var FilterComponent = {
             //});
             //console.log(generatedFilters);
         });
-		
         //#region Clear filters event
         $(document).on("click", FormControls.btnClearFilter, function () {
             //var grid = $(`#${documentName}Grid`).data("kendoGrid");

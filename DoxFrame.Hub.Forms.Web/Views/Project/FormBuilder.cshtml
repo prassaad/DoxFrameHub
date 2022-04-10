@@ -14,7 +14,7 @@
     }
 
     .form-body .col-md-6, .form-body .col-md-12 {
-        min-height: 400px;
+        min-height: 500px;
     }
 
     .draggable {
@@ -48,7 +48,9 @@
     <button type="button" class="btn" id="open-to-storage"><img src="/forms/icons/folder2-open.svg" alt="" width="24" height="24"></button>
     <button type="button" class="btn" id="copy-to-file"><img src="/forms/icons/save.svg" alt="" width="24" height="24"></button>
     <li class="nav-item">
-        <a class="nav-link" href="#"> Preview in new tab&nbsp;<img class="design-mode" style="cursor: pointer" src="/forms/icons/design-mode-off.svg" alt="" width="24" height="24"></a>
+          <a class="nav-link active" aria-current="page" asp-area="App" asp-controller="Home" asp-action="Index" asp-route-ProjectId=@ViewBag.ProjectId asp-route-FormId=@ViewBag.FormId  asp-route-Apptitle=@ViewBag.ProjectTitle asp-route-FormTitle=@ViewBag.FormTitle>
+            Preview App.&nbsp;
+        </a>
     </li>
     <button type="button" class="btn" id="save-to-db"><img src="/forms/icons/save-to-db.svg" alt="" width="24" height="24"></button>
 
@@ -137,7 +139,7 @@
                 <div class="mb-3 row draggable">
                     <div class="field" id="button-1">
                         <img src="/forms/icons/Button.svg" width="40" alt="">
-                        <span id="Button">Button</span>
+                        <span id="Submit">Submit</span>
                     </div>
                 </div>
 

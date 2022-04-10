@@ -1,5 +1,5 @@
 ﻿var ResourceName = "";
-var HostUrl = "https://doxframehub.herokuapp.com/";
+var HostUrl = "https://localhost:44302/";
 var Utility = function () {
 
     this.GetHostUrl = function () {

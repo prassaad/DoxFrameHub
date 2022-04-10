@@ -17,28 +17,15 @@ namespace DoxFrame.Hub.Web.Areas.Forms.Controllers
 
 
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Index(Guid ProjectId, Guid FormId, string Apptitle, string FormTitle)
         {
+            ViewBag.ProjectId = ProjectId;
+            ViewBag.FormId = FormId;
+            ViewBag.AppTitle = Apptitle;
+            ViewBag.FormTitle = FormTitle;
             return View();
         }
-        [HttpGet]
-        [Authorize]
-        public  IActionResult Forms()
-        {
-
-            ViewBag.CurrentUserTenantId = HttpContext.Session.GetString("CurrentUserTenantId") == null ? "" : HttpContext.Session.GetString("CurrentUserTenantId");
-            try
-            {
-                return ViewComponent("Forms", "");
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Exception = ex.Message;
-            }
-
-            return View();
-            
-        }
+       
        
         [Authorize]
         public IActionResult DesignForm()

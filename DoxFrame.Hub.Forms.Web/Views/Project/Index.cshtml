@@ -90,6 +90,11 @@
                     <h4 class="fw-bold mb-0">@project.Title</h4>
                     <p>@project.Summary</p>
                     <span>@project.Id</span>
+                    <div>
+                        <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Processe(s)</a>
+                        &nbsp; | &nbsp; <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Forms</a>
+
+                    </div>
                 </div>
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -184,10 +189,10 @@
                             <a class="dropdown-item" href="#"> Business &raquo; </a>
                             <ul class="submenu dropdown-menu">
                                 <li>
-                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Processes Models</a>
+                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Processe(s)</a>
                                 </li>
                                 <li>
-                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>DMN Models</a>
+                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>DMN</a>
                                 </li>
                             </ul>
                         </li>
@@ -228,6 +233,7 @@
                     </ul>
                   
                 </div>
+              
             </div>
         }
     </div>
