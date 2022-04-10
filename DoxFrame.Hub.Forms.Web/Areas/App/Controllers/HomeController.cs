@@ -7,7 +7,7 @@ using System;
 namespace DoxFrame.Hub.Web.Areas.Forms.Controllers
 {
     
-    [Area("Forms")]
+    [Area("App")]
     public class HomeController : Controller
     {
 

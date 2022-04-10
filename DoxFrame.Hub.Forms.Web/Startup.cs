@@ -112,8 +112,15 @@ namespace DoxFrame.Hub.Web
 
             app.UseSession();
             app.UseRouting();
-
             app.UseCors();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true)); // allow any origin
+               // .AllowCredentials()); // allow credentials
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -134,6 +141,10 @@ namespace DoxFrame.Hub.Web
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
+                endpoints.MapAreaControllerRoute(
+                          name: "App",
+                          areaName: "App",
+                          pattern: "App/{controller=Home}/{action=Index}/{id?}");
             });
 
 
