@@ -70,6 +70,7 @@ namespace DoxFrame.Hub.Web
                     options.ClientSecret = Configuration["Auth0:ClientSecret"];
                     options.Scope = "openid profile email metadata";
                     //options.Scope = "picture";
+                    options.CallbackPath = new PathString("/callback");
 
                 }).WithAccessToken(options =>
                 {
