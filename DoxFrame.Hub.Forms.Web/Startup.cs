@@ -137,8 +137,12 @@ namespace DoxFrame.Hub.Web
             app.UseAuthentication();
             app.UseAuthorization();
       
+	  
+	  
             app.UseEndpoints(endpoints =>
             {
+				 endpoints.MapDefaultControllerRoute();
+				
                 endpoints.MapControllerRoute(
                  name: "Areas",
                 pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
