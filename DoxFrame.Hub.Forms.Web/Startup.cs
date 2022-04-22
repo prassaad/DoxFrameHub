@@ -70,8 +70,7 @@ namespace DoxFrame.Hub.Web
                     options.ClientSecret = Configuration["Auth0:ClientSecret"];
                     options.Scope = "openid profile email metadata";
                     //options.Scope = "picture";
-                    options.CallbackPath = new PathString("/callback");
-
+                  
                 }).WithAccessToken(options =>
                 {
                     options.Audience = Configuration["Auth0:Audience"];
@@ -136,20 +135,18 @@ namespace DoxFrame.Hub.Web
 
             app.UseAuthentication();
             app.UseAuthorization();
-      
-	  
-	  
+
+           
             app.UseEndpoints(endpoints =>
             {
-				 endpoints.MapDefaultControllerRoute();
-				
-                endpoints.MapControllerRoute(
-                 name: "Areas",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+             endpoints.MapControllerRoute(
+               name: "Areas",
+              pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+             endpoints.MapControllerRoute(
+                   name: "default",
+             pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
 
