@@ -69,10 +69,10 @@ namespace DoxFrame.Hub.Core.Services
 
             return new Result<Form>(items.First());
         }
-        public async Task<Form> GeFormByIdAsync(Guid projectId,Guid formId)
+        public async Task<Form> GetFormByIdAsync(Guid projectId,Guid formId)
         {
-            var fromSpec = new ProjectByIdWithItemsSpec(projectId);
-            var project = await _repository.GetBySpecAsync(fromSpec);
+            var projSpec = new ProjectByIdWithItemsSpec(projectId);
+            var project = await _repository.GetBySpecAsync(projSpec);
 
             var formSpec = new FormById(formId);
 

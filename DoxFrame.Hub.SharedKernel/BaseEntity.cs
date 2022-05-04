@@ -8,13 +8,16 @@ namespace DoxFrame.Hub.SharedKernel
     {
         public Guid  Id { get; set; }
         public Guid CreatedBy { get; set; }
+        public string CreatedByName { get; set; }
+        public string CreatedTime { get; set; }
+        public string ModifiedTime { get; set; }
         public Guid ModifiedBy { get; set; }
+        public Guid ModifiedByName { get; set; }
 
         // For Data Isolation
         public Guid HubUserId { get; set; } // Account linked with User Id
         public Guid TenantId { get; set; } // Tenant
-        public Guid ProjectId { get; set; } // Project
-
+   
         public List<BaseDomainEvent> Events = new List<BaseDomainEvent>();
     }
 }

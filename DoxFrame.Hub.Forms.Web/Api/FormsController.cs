@@ -1,5 +1,6 @@
 ﻿using DoxFrame.Hub.Core.ProjectAggregate;
 using DoxFrame.Hub.Core.ProjectAggregate.Specifications;
+using DoxFrame.Hub.SharedKernel;
 using DoxFrame.Hub.SharedKernel.Interfaces;
 using DoxFrame.Hub.Web.ApiModels;
 using Microsoft.AspNetCore.Mvc;
@@ -61,7 +62,9 @@ namespace DoxFrame.Hub.Web.Api
             var project = await _repository.GetBySpecAsync(projectSpec);
             if (project == null) return NotFound("No such project");
 
-            project.AddForm(new Form() { ProjectId=request.ProjectId,  Title = request.Title, OperationType = request.OperationType });
+             
+
+      project.AddForm(new Component() { ComponentType ="form", Title = request.Title, Form = new Form() { ProjectId = request.ProjectId, Title = request.Title, OperationType = request.OperationType }});
 
             try { 
              await  _repository.UpdateAsync(project);

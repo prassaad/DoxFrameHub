@@ -11,17 +11,17 @@ using System.Text;
 
 namespace DoxFrame.Hub.Core.Services
 {
-    public class ProcessesRepository : IProcessesRepository 
+    public class WorkflowsRepository : IProcessesRepository 
     {
          
         private readonly IRepository<Project> _repository;
 
-        public ProcessesRepository(IRepository<Project> repository)
+        public WorkflowsRepository(IRepository<Project> repository)
         {
             _repository = repository;
         }
      
-        public byte[] ProcessModelLayoutToByteArray(string ProcessModelLayout)
+        public byte[] WorkflowModelLayoutToByteArray(string ProcessModelLayout)
         {
             UTF8Encoding utf8 = new UTF8Encoding();
             byte[] layoutBytes = new byte[1024];
@@ -29,7 +29,7 @@ namespace DoxFrame.Hub.Core.Services
             return layoutBytes;
         }
  
-        public string ProcessModelLayoutToXml(byte[] processModelLayout)
+        public string WorkflowModelLayoutToXml(byte[] processModelLayout)
         {
             return System.Text.Encoding.Default.GetString(processModelLayout);
         }

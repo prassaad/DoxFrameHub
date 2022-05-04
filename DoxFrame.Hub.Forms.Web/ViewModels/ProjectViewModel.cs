@@ -7,8 +7,9 @@ namespace DoxFrame.Hub.Web.ViewModels
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
+        public List<ComponentsViewModel> Components = new();
         public List<FormViewModel> Forms = new();
-        public List<ProcessViewModel> Processes = new();
+        public List<WorflowViewModel> Workflows = new();
     }
 
     public class ProjectListViewModel

@@ -80,163 +80,167 @@
 
         </div>
     }
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
-        @foreach (var project in Model)
-        {
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+    @foreach (var project in Model)
+    {
 
-            <div class="col d-flex align-items-start">
-                <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
-                <div>
-                    <h4 class="fw-bold mb-0">@project.Title</h4>
-                    <p>@project.Summary</p>
-                    <span>@project.Id</span>
+                <div class="col d-flex align-items-start">
+                    <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text></svg>
                     <div>
-                        <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Processe(s)</a>
-                        &nbsp; | &nbsp; <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Forms</a>
+                        <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="Edit" asp-route-ProjectId=@project.Id  asp-route-Apptitle=@project.Title>
+                            <h4 class="fw-bold mb-0">@project.Title</h4>
+                            <p>@project.Summary</p>
+                        </a>
+                      
+                        <span>@project.Id</span>
+                        @*<div>
+
+                            <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Forms</a>
+                            &nbsp; | &nbsp; <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Reports</a>
+                            &nbsp; | &nbsp;<a class="nav-underline" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Workflows</a>
+                            &nbsp; | &nbsp; <a class="nav-underline" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Workflows</a>
+                        </div>*@
+                    </div>
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu  text-small shadow" aria-labelledby="dropdownUser2">
+                            <li>
+                                <a class="dropdown-item" href="#"> Application &raquo; </a>
+                                <ul class="submenu dropdown-menu">
+
+                                    <li>
+                                        <a class="dropdown-item" href="#"> Data Models (Backend DB) &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="DataIndex" asp-route-projectId=@project.Id>Database</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="#">Web Services/ API(s)</a></li>
+                                            <li><a class="dropdown-item" href="#">Data files</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#"> User Interface (UI) &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Forms</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Reports</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Dashboards</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#"> Reusability (components) &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Apps</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Functions</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Widgets</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Access and Security &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Users</a>
+                                            </li>
+
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Roles</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Access rights</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Menu</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Interoperability (Integrations) &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Application</a></li>
+                                            <li><a class="dropdown-item" href="#">Email</a></li>
+                                            <li><a class="dropdown-item" href="#">SMS</a></li>
+                                            <li><a class="dropdown-item" href="#">Payment</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Help Management &raquo; </a>
+
+                                    </li>
+
+                                </ul>
+                            </li>
+
+
+
+                            <li>
+                                <a class="dropdown-item" href="#"> Business &raquo; </a>
+                                <ul class="submenu dropdown-menu">
+                                    <li>
+                                        <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="WorkflowIndex" asp-route-projectId=@project.Id>Workflows</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="WorkflowIndex" asp-route-projectId=@project.Id>DMN</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+                            <li>
+                                <a class="dropdown-item" href="#"> Project &raquo; </a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Problem Statement</a></li>
+                                    <li><a class="dropdown-item" href="#">The Solution</a></li>
+                                    <li><a class="dropdown-item" href="#">Charter</a></li>
+                                    <li><a class="dropdown-item" href="#">Phases</a></li>
+                                    <li><a class="dropdown-item" href="#">Activities</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Stakeholders &raquo;</a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Stakeholders Matrix</a></li>
+                                        </ul>
+
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Requirements Backlog (FR(s) / NFR(s) &raquo;</a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Functional</a></li>
+                                            <li>
+                                                <a class="dropdown-item" href="#">Non Functional</a>
+                                                <ul class="submenu dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Checklist Document</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Project Settings</a></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#remProject" style="color:red">Remove</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
 
                     </div>
-                </div>
-                <div class="flex-shrink-0 dropdown">
-                    <a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                        </svg>
-                    </a>
-                    <ul class="dropdown-menu  text-small shadow" aria-labelledby="dropdownUser2">
-                        <li>
-                            <a class="dropdown-item" href="#"> Application &raquo; </a>
-                            <ul class="submenu dropdown-menu">
 
-                                <li>
-                                    <a class="dropdown-item" href="#"> Data Models (Backend DB) &raquo; </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="DataIndex" asp-route-projectId=@project.Id>Database</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">Web Services/ API(s)</a></li>
-                                        <li><a class="dropdown-item" href="#">Data files</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#"> User Interface (UI) &raquo; </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Forms</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Reports</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Dashboards</a>
-                                        </li>
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#"> Reusability (components) &raquo; </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Apps</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Functions</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@project.Id>Widgets</a>
-                                        </li>
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Access and Security &raquo; </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Users</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Roles</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Access rights</a>
-                                        </li>
-                                        <li>
-                                            <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="AppUsers" asp-route-projectId=@project.Id>Menu</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Interoperability (Integrations) &raquo; </a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Application</a></li>
-                                        <li><a class="dropdown-item" href="#">Email</a></li>
-                                        <li><a class="dropdown-item" href="#">SMS</a></li>
-                                        <li><a class="dropdown-item" href="#">Payment</a></li>
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Help Management &raquo; </a>
-                                    
-                                </li>
-
-                            </ul>
-                        </li>
-
-
-
-                        <li>
-                            <a class="dropdown-item" href="#"> Business &raquo; </a>
-                            <ul class="submenu dropdown-menu">
-                                <li>
-                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>Processe(s)</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link dropdown-item" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@project.Id>DMN</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                      
-                        <li>
-                            <a class="dropdown-item" href="#"> Project &raquo; </a>
-                            <ul class="submenu dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Problem Statement</a></li>
-                                <li><a class="dropdown-item" href="#">The Solution</a></li>
-                                <li><a class="dropdown-item" href="#">Charter</a></li>
-                                <li><a class="dropdown-item" href="#">Phases</a></li>
-                                <li><a class="dropdown-item" href="#">Activities</a></li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Stakeholders &raquo;</a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Stakeholders Matrix</a></li>
-                                    </ul>
-
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">Requirements Backlog (FR(s) / NFR(s) &raquo;</a>
-                                    <ul class="submenu dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Functional</a></li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">Non Functional</a>
-                                            <ul class="submenu dropdown-menu">
-                                                <li><a class="dropdown-item" href="#">Checklist Document</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Project Settings</a></li>
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#remProject" style="color:red">Remove</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                  
-                </div>
-              
-            </div>
-        }
-    </div>
+                </div>}
+</div>
 
 </div>
 

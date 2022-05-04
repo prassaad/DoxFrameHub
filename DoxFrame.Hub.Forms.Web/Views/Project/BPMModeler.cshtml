@@ -14,7 +14,7 @@
     <li class="nav-item">
         <a class="nav-link">
             <span class="text-dark align-text-bottom">
-                Process :  @ViewBag.ProcessTitle
+                Workflow :  @ViewBag.WorkflowTitle
             </span>
         </a>
     </li>
@@ -34,7 +34,7 @@
     <button type="button" class="btn" id="save-to-db"><img src="/forms/icons/save-to-db.svg" alt="" width="24" height="24"></button>
 
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Project" asp-action="ProcessIndex" asp-route-projectId=@ViewBag.ProjectId><span class="btn btn-close"></span> </a>
+        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Project" asp-action="WorkflowIndex" asp-route-projectId=@ViewBag.ProjectId><span class="btn btn-close"></span> </a>
     </li>
 </ul>
 
@@ -67,10 +67,10 @@
 
 
 <input type="hidden" id="hdnProjectId" value="@ViewBag.ProjectId" />
-<input type="hidden" id="hdnProcessId" value=@ViewBag.ProcessId />
-<input type="hidden" id="hdnProcessKey" value=@ViewBag.ProcessKey />
+<input type="hidden" id="hdnWorkflowId" value=@ViewBag.WorkflowId />
+<input type="hidden" id="hdnWorkflowKey" value=@ViewBag.WorkflowKey />
 <input type="hidden" id="hdnProjectTitle" value="@ViewBag.ProjectTitle" />
-<input type="hidden" id="hdnProcessTitle" value=@ViewBag.ProcessTitle />
+<input type="hidden" id="hdnWorkflowTitle" value=@ViewBag.WorkflowTitle />
 
 
 @if (ViewBag.Layout == "New")
@@ -85,8 +85,8 @@ else
 @* Set Form Layout Json directly to local storage rather  set to a filed to miss data*@
 <script type="text/javascript">
 
-    localStorage['@ViewBag.ProcessId'] = '@ViewBag.Layout';
-    localStorage['cur-process-key'] = '@ViewBag.ProcessId';
+    localStorage['@ViewBag.WorkflowId'] = '@ViewBag.Layout';
+    localStorage['cur-workflow-key'] = '@ViewBag.WorkflowId';
 
 </script>
 

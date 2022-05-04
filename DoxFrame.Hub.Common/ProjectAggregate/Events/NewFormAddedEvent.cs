@@ -5,11 +5,12 @@ namespace DoxFrame.Hub.Core.ProjectAggregate.Events
     {
         public Project Project { get; set; }
         public Form Form { get; set; }
+        public Component Component { get; set; }
         public NewFormAddedEvent(Project project,
-            Form newform)
+             Component newComponent)
         {
             Project = project;
-            Form = newform;
+            Component = newComponent;
         }
     }
 }

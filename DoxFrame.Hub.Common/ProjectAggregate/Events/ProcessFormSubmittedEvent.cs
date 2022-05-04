@@ -3,11 +3,11 @@ using DoxFrame.Hub.SharedKernel;
 
 namespace DoxFrame.Hub.Core.ProjectAggregate.Events
 {
-    public class ProcessFormSubmittedEvent : BaseDomainEvent
+    public class WorkflowFormSubmittedEvent : BaseDomainEvent
     {
         public Form SubmittedForm { get; set; }
 
-        public ProcessFormSubmittedEvent(Form submittedForm)
+        public WorkflowFormSubmittedEvent(Form submittedForm)
         {
             SubmittedForm = submittedForm;
         }

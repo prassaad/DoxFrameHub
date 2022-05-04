@@ -46,8 +46,8 @@ namespace DoxFrame.Hub.Web
             }
             dbContext.SaveChanges();
 
-            SampleProject1.AddForm(form1);
-            SampleProject1.AddForm(form2);
+           // SampleProject1.AddForm(form1);
+           // SampleProject1.AddForm(form2);
             dbContext.Projects.Add(SampleProject1);
 
             dbContext.SaveChanges();

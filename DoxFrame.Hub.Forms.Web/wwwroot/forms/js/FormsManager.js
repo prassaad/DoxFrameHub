@@ -8,7 +8,7 @@ var _utility = new Utility();
         var projectId = $('#hdnProjId').val(); 
         var modalDialog = document.getElementById('createNewForm');
         _hostUrl = _utility.GetHostUrl();
-        var redirectUrl = _hostUrl+"Project/" + projectId + "/forms";
+        var redirectUrl = _hostUrl + "Project/" + projectId + "/edit?Apptitle=Travel Request";
         var popupTimeOut = 500;
 
 

@@ -1,22 +1,27 @@
 ﻿using DoxFrame.Hub.Core.ProjectAggregate.Events;
 using DoxFrame.Hub.SharedKernel;
 using DoxFrame.Hub.SharedKernel.Interfaces;
+using System;
 
 namespace DoxFrame.Hub.Core.ProjectAggregate
 {
-    public class Form : Document, IAggregateRoot
+    public class Form : BaseEntity, IAggregateRoot
     {
+        public Guid ProjectId { get; set; }
+        public Guid ComponentId { get; set; }
+        public string Title { get;  set; }
+        public string Description { get;  set; }
+        public byte[] Layout { get; set; }
         public string OperationType { get; set; }
         public string Key { get; set; }
-        public string ProcessArea { get; set; }
-        public string ProcessName { get; set; }
+        public string Area { get; set; }
+        public string WorkflowName { get; set; }
         public string Trigger { get; set; }
         public string RequestMethod { get; set; }
         public string RequestUri { get; set; }
         public bool isPublished { get; set; }
         public FormState WorkFlowStatus { get; set; }
         public bool isActive { get; set; }
-
         public void Update(Form form)
         {
             Title = form.Title;
@@ -36,10 +41,10 @@ namespace DoxFrame.Hub.Core.ProjectAggregate
             Events.Add(new FormUpdatedEvent(this));
         }
 
-        public void SubmittedToProcess()
+        public void SubmittedToWorkflow()
         {
             isActive = false;
-            Events.Add(new ProcessFormSubmittedEvent(this));
+            Events.Add(new WorkflowFormSubmittedEvent(this));
         }
 
 

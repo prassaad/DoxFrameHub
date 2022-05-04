@@ -14,12 +14,18 @@ namespace DoxFrame.Hub.Core.ProjectAggregate
         public string Summary  { get; private set; } // Project Summary
         public string StartDate { get; private set; } //Start Date
         public string EndDate { get; private set; } //Start Date
-
+ 
+        private List<Component> _components = new List<Component>();
         private List<Form> _forms = new List<Form>();
-        private List<Process> _processes = new List<Process>();
+        private List<Report> _reports = new List<Report>();
+        private List<Page> _pages = new List<Page>();
+        private List<Workflow> _workflows = new List<Workflow>();
 
+        public IEnumerable<Component> Components => _components.AsReadOnly();
         public IEnumerable<Form> Forms => _forms.AsReadOnly();
-        public IEnumerable<Process> Processes => _processes.AsReadOnly();
+        public IEnumerable<Report> Reports => _reports.AsReadOnly();
+        public IEnumerable<Page> Pages => _pages.AsReadOnly();
+        public IEnumerable<Workflow> Workflows => _workflows.AsReadOnly();
 
         public ProjectStatus Status => _forms.All(i => i.isPublished) ? ProjectStatus.Complete : ProjectStatus.InProgress;
 
@@ -29,13 +35,14 @@ namespace DoxFrame.Hub.Core.ProjectAggregate
             Summary = Guard.Against.NullOrEmpty(summary, nameof(summary));
 
         }
-        // Form definitions
-        public void AddForm(Form newForm)
-        {
-            Guard.Against.Null(newForm, nameof(newForm));
-            _forms.Add(newForm);
+ 
 
-            var newFormAddedEvent = new NewFormAddedEvent(this, newForm);
+        // Form definitions
+        public void AddForm(Component newComponent)
+        {
+            Guard.Against.Null(newComponent, nameof(newComponent));
+             _components.Add(newComponent);
+            var newFormAddedEvent = new NewFormAddedEvent(this, newComponent);
             Events.Add(newFormAddedEvent);
         }
         public void RemoveForm(Form rmForm)
@@ -45,24 +52,53 @@ namespace DoxFrame.Hub.Core.ProjectAggregate
             var formRemovedEvent = new FormRemovedEvent(this, rmForm);
             Events.Add(formRemovedEvent);
         }
-        public void UpdateName(string newName)
-        {
-            Title = Guard.Against.NullOrEmpty(newName, nameof(newName));
-        }
-        // Process Definitions
+       
 
-        public void AddProcess(Process newProcess)
+
+        // Report definitions
+        public void AddReport(Component newComponent)
         {
-            Guard.Against.Null(newProcess, nameof(newProcess));
-            _processes.Add(newProcess);
-            var newProcessAddedEvent = new NewProcessAddedEvent(this, newProcess);
-            Events.Add(newProcessAddedEvent);
+            Guard.Against.Null(newComponent, nameof(newComponent));
+            _components.Add(newComponent);
+            var newReportAddedEvent = new NewReportAddedEvent(this, newComponent);
+            Events.Add(newReportAddedEvent);
         }
-        public void RemoveProcess(Process rmProcess)
+        public void RemoveReport(Report rmReport)
         {
-            _processes.Remove(rmProcess);
-            var processRemovedEvent = new ProcessRemovedEvent(this, rmProcess);
-            Events.Add(processRemovedEvent);
+            _reports.Remove(rmReport);
+            var  reportRemovedEvent = new ReportRemovedEvent(this, rmReport);
+            Events.Add(reportRemovedEvent);
+        }
+
+        // Page definitions
+        public void AddPage(Component newComponent)
+        {
+            Guard.Against.Null(newComponent, nameof(newComponent));
+            _components.Add(newComponent);
+            var newReportAddedEvent = new NewReportAddedEvent(this, newComponent);
+            Events.Add(newReportAddedEvent);
+        }
+        public void RemovePage(Page rmPage)
+        {
+            _pages.Remove(rmPage);
+            var pageRemovedEvent = new PageRemovedEvent(this, rmPage);
+            Events.Add(pageRemovedEvent);
+        }
+
+ 
+        // Workflow Definitions
+        public void AddWorkflow(Component newComponent)
+        {
+            Guard.Against.Null(newComponent, nameof(newComponent));
+            _components.Add(newComponent);
+            var newWorkflowAddedEvent = new NewWorkflowAddedEvent(this, newComponent);
+            Events.Add(newWorkflowAddedEvent);
+        }
+        public void RemoveWorkflow(Workflow rmWorkflow)
+        {
+            _workflows.Remove(rmWorkflow);
+            var workflowRemovedEvent = new WorkflowRemovedEvent(this, rmWorkflow);
+            Events.Add(workflowRemovedEvent);
         }
 
     }

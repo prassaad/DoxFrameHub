@@ -9,8 +9,9 @@ namespace DoxFrame.Hub.Core.ProjectAggregate.Specifications
         {
             Query
                 .Where(project => project.Id == projectId)
+                .Include(project => project.Components)
                 .Include(project => project.Forms)
-                .Include(project => project.Processes);
+                .Include(project => project.Workflows);
         }
     }
 }

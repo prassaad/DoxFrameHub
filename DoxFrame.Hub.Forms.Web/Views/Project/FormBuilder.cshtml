@@ -1,4 +1,5 @@
-﻿
+﻿@{Layout = "~/Views/Shared/_AppEdiDesignerLayout.cshtml"; }
+ 
 
 <link rel="stylesheet" href="/forms/css/jquery.ui.theme.css" />
 @*<link rel="stylesheet" href="/forms/css/bootstrap.css" />*@
@@ -30,32 +31,26 @@
         padding: 10px;
     }
 </style>
-
-
-
+ 
 <ul class="nav justify-content-end border border-1">
    
     @*<li class="nav-item">
-        <a class="nav-link">
-            <span class="text-dark align-text-bottom">
-                Project : @ViewBag.ProjectTitle
-            </span>
-        </a>
-    </li>*@
+            <a class="nav-link">
+                <span class="text-dark align-text-bottom">
+                    Project : @ViewBag.ProjectTitle
+                </span>
+            </a>
+        </li>*@
 
 
     @*<button type="button" class="btn" id="copy-to-storage"><img src="/forms/icons/plus-circle.svg" alt="" width="24" height="24"></button>*@
     <button type="button" class="btn" id="open-to-storage"><img src="/forms/icons/folder2-open.svg" alt="" width="24" height="24"></button>
     <button type="button" class="btn" id="copy-to-file"><img src="/forms/icons/save.svg" alt="" width="24" height="24"></button>
-    <li class="nav-item">
-          <a class="nav-link active" aria-current="page" asp-area="App" asp-controller="Home" asp-action="Index" asp-route-ProjectId=@ViewBag.ProjectId asp-route-FormId=@ViewBag.FormId  asp-route-Apptitle=@ViewBag.ProjectTitle asp-route-FormTitle=@ViewBag.FormTitle>
-            Preview App.&nbsp;
-        </a>
-    </li>
+
     <button type="button" class="btn" id="save-to-db"><img src="/forms/icons/save-to-db.svg" alt="" width="24" height="24"></button>
 
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Project" asp-action="FormIndex" asp-route-projectId=@ViewBag.ProjectId><span class="btn btn-close"></span> </a>
+        <a class="nav-link active" aria-current="page"  asp-area="" asp-controller="Project" asp-action="FormBuilder"  asp-route-ComponentId=@ViewBag.ComponentId><span class="btn btn-close"></span> </a>
     </li>
 </ul>
 
@@ -81,10 +76,10 @@
 @* This can be used for save form layout to local *@
 <input id="file-input" type="file" name="name" style="display: none;" />
 <div class="my-1 p-1 bg-body rounded shadow-sm">
-  
-      
+
+
     <div class="row">
-        <div class="col-md-2" style="padding: 0px 30px 30px 30px; background-color: #fff;" >
+        <div class="col-md-2" style="padding: 0px 30px 30px 30px; background-color: #fff;">
 
             <h3>Fields</h3>
             <form role="form">
@@ -162,7 +157,7 @@
                         width: 60%;
 "
                          class="col-md-12 form-horizontal droppable sortable">
-                        <div id="no-content-div" class="d-block text-center" >
+                        <div id="no-content-div" class="d-block text-center">
                             <h3>Design @ViewBag.FormTitle Form</h3> <br />
                             <h5> You can drag & drop UI components from the left menu on the  screen.</h5>
                         </div>
@@ -412,16 +407,14 @@
 <input type="hidden" id="hdnFormKey" value=@ViewBag.FormKey />
 <input type="hidden" id="hdnProjectTitle" value="@ViewBag.ProjectTitle" />
 <input type="hidden" id="hdnFormTitle" value=@ViewBag.FormTitle />
-   
+
 
 @if (ViewBag.Layout == "New")
 {
-    <input type="hidden" id="hdnHasLayout" value="0" />
-}
-else
-{
-    <input type="hidden" id="hdnHasLayout" value="1" />
-}
+<input type="hidden" id="hdnHasLayout" value="0" /> }
+            else
+            {
+<input type="hidden" id="hdnHasLayout" value="1" />}
 
 @* Set Form Layout Json directly to local storage rather  set to a filed to miss data*@
 <script type="text/javascript">
@@ -430,7 +423,7 @@ else
 
 </script>
 
- 
+
 
 @* Forms scrips NEED TO CLEANSE *@
 

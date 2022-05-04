@@ -1,0 +1,14 @@
+﻿@{Layout = "~/Views/Shared/_AppEditLayout.cshtml"; }
+@{ ViewData["Title"] = "Form"; }
+
+<div class="px-3 py-5">
+    <div id="no-content-div" class="d-block text-center">
+        <h3>@ViewBag.ComponenId</h3>
+        <h3>@ViewBag.ComponentTitle - @ViewBag.ComponentType</h3>
+      
+        <a class="btn btn-primary" asp-area="" asp-controller="Project" asp-action="FormBuilder" asp-route-ProjectId=@ViewBag.ProjectId asp-route-ComponentId=@ViewBag.ComponenId>
+            Design
+        </a>
+
+    </div>
+</div>

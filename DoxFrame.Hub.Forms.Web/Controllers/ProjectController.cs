@@ -36,9 +36,52 @@ namespace DoxFrameHub.Web.Controllers
             return View(projectDTOs);
         }
 
+        // Edit App Route
+        // GET project/{projectId}
+        [HttpGet("{projectId:Guid}/edit")]
+        public async Task<IActionResult> Edit(Guid ProjectId, string Apptitle)
+        {
+            ViewBag.ProjectId = ProjectId;
+            ViewBag.AppTitle = Apptitle;
+            var components = GetComponents(ProjectId).Components;
+            ViewData["menu"] = components;
+            if (components.Count > 0)
+            {
+                return RedirectToAction("EditForm", new { projectId = ProjectId, componentId = components.FirstOrDefault().Id});
+            }
+
+            return View();
+        }
+
+        // Edit From in App Route
+        [HttpGet("EditForm/{projectId:Guid}/{componentId:Guid}")]
+        public async Task<IActionResult> EditForm(Guid ProjectId, Guid ComponentId)
+        {
+            var ProjectViewModel = GetComponents(ProjectId);
+            ViewData["menu"] = ProjectViewModel.Components;
+            ViewBag.ProjectId = ProjectId;
+            ViewBag.AppTitle = ProjectViewModel.Title;
+            ViewBag.ComponenId = ComponentId;
+            ViewBag.ComponentTitle = ProjectViewModel.Components.Where(c => c.Id == ComponentId).FirstOrDefault().Title;
+            ViewBag.ComponentType = ProjectViewModel.Components.Where(c => c.Id == ComponentId).FirstOrDefault().ComponentType;
+            return View();
+        }
+        // Edit Report in App Route
+        [HttpGet("{projectId:Guid}/edit/report/{componentId:Guid}")]
+        public async Task<IActionResult> ReportEditView(Guid ProjectId, Guid ComponentId)
+        {
+            var ProjectViewModel = GetComponents(ProjectId);
+            ViewData["menu"] = ProjectViewModel.Components;
+            ViewBag.ProjectId = ProjectId;
+            ViewBag.AppTitle = ProjectViewModel.Title;
+            ViewBag.ComponenId = ComponentId;
+            return View();
+        }
+
+
         // GET project/{projectId?}
-        [HttpGet("{projectId:Guid}/processes")]
-        public async Task<IActionResult> ProcessIndex(Guid projectId)
+        [HttpGet("{projectId:Guid}/workflows")]
+        public async Task<IActionResult> WorkflowIndex(Guid projectId)
         {
             var spec = new ProjectByIdWithItemsSpec(projectId);
             var project = await _projectRepository.GetBySpecAsync(spec);
@@ -47,8 +90,8 @@ namespace DoxFrameHub.Web.Controllers
             {
                 Id = project.Id,
                 Title = project.Title,
-                Processes = project.Processes
-                            .Select(process => ProcessViewModel.FromToProcess(process))
+                Workflows = project.Workflows
+                            .Select(workflow => WorflowViewModel.FromToWorkflow(workflow))
                             .ToList()
             };
             return View(dto);
@@ -71,6 +114,49 @@ namespace DoxFrameHub.Web.Controllers
             };
             return View(dto);
         }
+
+        [Authorize]
+        [HttpGet("{ProjectId:Guid}/{ComponentId:Guid}/FormBuilder")]
+        public async Task<IActionResult> FormBuilderAsync(Guid ProjectId, Guid ComponentId)
+        {
+            // Get Form by ProjetcId and Component Id
+            var projectSpec = new ProjectByIdWithItemsSpec(ProjectId);
+            var project = await _projectRepository.GetBySpecAsync(projectSpec);
+            if (project == null) return NotFound("No such project");
+
+            var form = project.Forms.FirstOrDefault(x => x.ComponentId == ComponentId);
+            if (form == null) return NotFound("No such form.");
+
+            // Check Layout data exist
+            if (form.Layout != null)
+            {
+                // get encode fromLayout design to Json
+                var formsRepo = new DoxFrame.Hub.Core.Services.FormsRepository(_projectRepository);
+                ViewBag.Layout = (string)formsRepo.FormLayoutToJson(form.Layout);
+
+            }
+            else
+            {
+                // if not exits
+                ViewBag.Layout = "New";
+            }
+
+            //for Evnet and Notification test
+            //form.SubmittedToProcess();
+            //await _projectRepository.UpdateAsync(project);
+
+
+            // This needs to optimize to a Single Object
+
+            ViewBag.ProjectId = ProjectId;
+            ViewBag.FormId = form.Id;
+            ViewBag.ProjectTitle = project.Title;
+            ViewBag.FormTitle = form.Title;
+
+
+            return View();
+        }
+
         [Authorize]
         [HttpGet("{ProjectId:Guid}/{FormId:Guid}/{ProjectTitle}/FormBuilder")]
         public async Task<IActionResult> FormBuilderAsync(Guid ProjectId, Guid FormId, string ProjectTitle, string FormTitle)
@@ -146,8 +232,8 @@ namespace DoxFrameHub.Web.Controllers
 
 
         [Authorize]
-        [HttpGet("{ProjectId:Guid}/{ProcessId:Guid}/{ProjectTitle}/BPMModeler")]
-        public async Task<IActionResult> BPMModelerAsync(Guid ProjectId, Guid ProcessId, string ProjectTitle, string ProcessTitle)
+        [HttpGet("{ProjectId:Guid}/{WorkflowId:Guid}/{ProjectTitle}/BPMModeler")]
+        public async Task<IActionResult> BPMModelerAsync(Guid ProjectId, Guid WorkflowId, string ProjectTitle, string WorkflowTitle)
         {
 
             // Get Form by ProjetcId and Process Id
@@ -155,8 +241,8 @@ namespace DoxFrameHub.Web.Controllers
             var project = await _projectRepository.GetBySpecAsync(projectSpec);
             if (project == null) return NotFound("No such project");
 
-            var process = project.Processes.FirstOrDefault(x => x.Id == ProcessId);
-            if (process == null) return NotFound("No such process.");
+            var workflow = project.Workflows.FirstOrDefault(x => x.Id == WorkflowId);
+            if (workflow == null) return NotFound("No such Workflow.");
 
             // In case No Process Key means needs to set more form data before BPM
             //if (process.Key == null)
@@ -166,11 +252,11 @@ namespace DoxFrameHub.Web.Controllers
             // This needs to optimize to a Single Object
  
             // Check Layout data exist
-            if (process.Layout != null && process.Layout.Length >0)
+            if (workflow.Layout != null && workflow.Layout.Length >0)
             {
-                // get encode process model Layout design to Xml
-                var processesRepo = new DoxFrame.Hub.Core.Services.ProcessesRepository(_projectRepository);
-                ViewBag.Layout = (string)processesRepo.ProcessModelLayoutToXml(process.Layout);
+                // get encode workflow model Layout design to Xml
+                var workflowRepo = new DoxFrame.Hub.Core.Services.WorkflowsRepository(_projectRepository);
+                ViewBag.Layout = (string)workflowRepo.WorkflowModelLayoutToXml(workflow.Layout);
 
             }
             else
@@ -183,14 +269,32 @@ namespace DoxFrameHub.Web.Controllers
             // This needs to optimize to a Single Object
 
             ViewBag.ProjectId = ProjectId;
-            ViewBag.ProcessId = ProcessId;
+            ViewBag.workflowId = WorkflowId;
             ViewBag.ProjectTitle = ProjectTitle;
-            ViewBag.ProcessTitle = ProcessTitle;
+            ViewBag.workflowTitle = WorkflowTitle;
 
 
             return View();
         }
 
 
+        // Common Function for Menu
+       private ProjectViewModel GetComponents(Guid ProjectId)
+        {
+            var spec = new ProjectByIdWithItemsSpec(ProjectId);
+            var project =  _projectRepository.GetBySpecAsync(spec);
+
+            var dto = new ProjectViewModel
+            {
+                Id = project.Result.Id,
+                Title = project.Result.Title,
+                Components = project.Result.Components
+                            .Select(component => ComponentsViewModel.FromToComponent(component))
+                            .ToList()
+            };
+            return dto;
+
+        }
+     
     }
 }

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DoxFrame.Hub.Web.ViewModels.ComponentsViewModel>
+    
+<div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+
+
+    @if (Model.Count() < 1)
+    {
+        <div id="no-content-div" class="d-block text-center">
+            <h3>No components</h3> <br />
+
+        </div>
+    }
+    else
+    {
+        <ul class="list-unstyled ps-0">
+            @foreach (var component in Model)
+            {
+                <li class="mb-1">
+
+                    <div class="collapse show" id="home-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li>
+                                <a class="link-dark rounded" asp-controller="Project" asp-action="EditForm" asp-route-ProjectId=@component.ProjectId asp-route-ComponentId=@component.Id> @component.Title</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    }
+   
+
+</div>
+

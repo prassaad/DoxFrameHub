@@ -139,13 +139,20 @@ namespace DoxFrame.Hub.Web
            
             app.UseEndpoints(endpoints =>
             {
+ 
+             endpoints.MapControllerRoute(
+            "defaultFormViewEdit", // Route name
+            "{projectId:Guid}/edit/form/{componentId:Guid}", // URL with parameters
+                new { controller = "Project", action = "FormEditView" }
+            );
+
 
              endpoints.MapControllerRoute(
-               name: "Areas",
-              pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+             name: "Areas",
+             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
              endpoints.MapControllerRoute(
-                   name: "default",
+             name: "default",
              pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });

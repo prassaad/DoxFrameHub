@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewBag.AppTitle</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="~/app/assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/app/css/styles.css" rel="stylesheet" />
+    <link href="~/app/css/sidebars.css" rel="stylesheet" />
+
+
+
+
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="border-end bg-white" id="sidebar-wrapper">
+            <div class="sidebar-heading border-bottom bg-light">@ViewBag.AppTitle</div>
+
+            @await Html.PartialAsync("_AppEditLayoutMenu", ViewData["menu"]
+                                                    as IEnumerable<DoxFrame.Hub.Web.ViewModels.ComponentsViewModel>)
+        </div>
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <div class="container-fluid">
+
+                    <a href="#" id="sidebarToggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                        </svg>
+                    </a> &nbsp;&nbsp;&nbsp;
+                    <div class="flex-shrink-0 dropdown">
+                        <a href="#" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu  text-small shadow" aria-labelledby="dropdownUser2">
+                            <li>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#createNewForm">
+                                    <h4 class="fw-bold mb-0">Form</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Project" asp-action="Edit" asp-route-ProjectId="" asp-route-Apptitle="">
+                                    <h4 class="fw-bold mb-0">Report</h4>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Project" asp-action="Edit" asp-route-ProjectId="" asp-route-Apptitle="">
+                                    <h4 class="fw-bold mb-0">Page</h4>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item active">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#createNewComponent">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                    </svg>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page content-->
+            <div class="container-fluid" id="layout-conainer">
+
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    @* New Form Create Modal *@
+    <!-- Modal -->
+    <div class="modal fade" id="createNewForm" tabindex="-1" aria-labelledby="createNewFormLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="frm-create" class="row g-3 needs-validation" novalidate>
+
+                        <input type="hidden" id="hdnProjId" value=@ViewBag.ProjectId  />
+                        <div class="col-12">
+                            <label for="inputFormTitle" class="form-label">Title *</label>
+                            <input type="text" class="form-control" id="inputFormTitle" placeholder="New Form" required>
+                            <div class="invalid-feedback">
+                                Please enter a form title.
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="selectFrmOpType" class="form-label">Form for</label>
+                            <select id="selectFrmOpType" class="form-select">
+                                <option disabled value=""></option>
+                                <option selected value="Create">Create</option>
+                                <option value="View">View</option>
+                                <option value="Update">Update</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a form for Create/View/Update.
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button class="btn btn-primary" type="submit">Create</button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="~/app/js/scripts.js"></script>
+    <script src="~/app/js/sidebars.js"></script>
+
+
+    <!-- Global for Application  -->
+    <script src="/js/AjaxHelper.js"></script>
+    @*<script src="custom/Utility.js"></script>*@
+    <script src="/js/ValidationHelper.js"></script>
+    <!-- Global for Application -->
+    @* Tool *@
+    <script src="/js/Utility.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/forms/js/FormsManager.js" type="module"></script>
+
+</body>
+</html>

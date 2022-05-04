@@ -24,8 +24,4 @@
     <ProjectReference Include="..\DoxFrame.Hub.SharedKernel\DoxFrame.Hub.SharedKernel.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>

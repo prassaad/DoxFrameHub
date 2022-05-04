@@ -105016,12 +105016,12 @@ function SetModelToLocalStore(hdnHasLayout) {
      
          if (hdnHasLayout === "0") {
             // new diagram
-            localStorage[_processId] = "";
+            localStorage[_workflowId] = "";
             createNewDiagram();
             return;
         }
  
-        var XMLText = localStorage[_processId];
+        var XMLText = localStorage[_workflowId];
         var parsedXML = parseLocalXML(XMLText);
    
         openDiagram(parseLocalXML(parsedXML));
@@ -105170,28 +105170,28 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()('#save-to-db').click(function (e) 
             //alert('Diagram exported. Check the developer tools!');
             //console.log('DIAGRAM', result.xml);
             //alert('getDiagramXML \n'+ result.xml);
-            localStorage[_processId] = result.xml;
+            localStorage[_workflowId] = result.xml;
 
             // Save to Database
             var _utility = new Utility();
             var _hostUrl = _utility.GetHostUrl();
             var processData = {
                 "projectId": _projectId,
-                "processId": _processId,
+                "workflowId": _workflowId,
                 "layout": result.xml
             };
 
             $.ajax({
-                url: _hostUrl + "api/Processes/updateprocessmodellayout/",
+                url: _hostUrl + "api/Workflows/updateworkflowmodellayout/",
                 type: 'post',
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (response) {
                     if (response.success) {
-                        alert('Updated Process model changes');
+                        alert('Updated Workflow model changes');
                     }
                     else {
-                        alert('Error in updating Procee model changes');
+                        alert('Error in updating Workflow model changes');
 
                     }
                 },

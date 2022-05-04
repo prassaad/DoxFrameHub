@@ -1,0 +1,33 @@
+﻿
+@{ ViewData["Title"] = "Select Tenant"; }
+
+ 
+@using (Html.BeginForm("SelectTenant", "Home", FormMethod.Post))
+{
+
+    <div class="d-flex  align-items-center" style="margin: 10px;">
+        <h4>Select Tenant</h4> &nbsp;
+        @Html.DropDownList("UserTenantId", (IEnumerable<SelectListItem>)ViewBag.UserTenantIds, "-- Select Tenant --") &nbsp;
+
+        <button type="button" id="btnGetForms" class="btn btn-primary btn-sm float-right">
+            Get Forms
+        </button>
+    </div>
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    $("#btnGetForms").click(function () {
+        $.ajax({
+            url: "../Forms/Home/Forms",
+            type: "get",
+            dataType: "html",
+            beforeSend: function (x) {
+            },
+            data: null,
+            success: function (result) {
+                $(".content").html(result);
+            }
+        });
+    });
+</script>

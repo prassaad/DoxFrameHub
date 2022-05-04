@@ -19,14 +19,17 @@ namespace DoxFrame.Hub.Infrastructure
 
         public async Task SendRequestAsync()
         {
+            //https://doxframe-camunda.herokuapp.com/
             var client = CamundaClient.Create("http://localhost:8080/engine-rest");
-            var process = await client.ProcessInstances.Query().List();
+            
+            
 
+            await client.Users.Query(new Camunda.Api.Client.User.UserQuery() { }).List();
 
             // Start Process
-            System.Collections.Generic.Dictionary<string, VariableValue> numberNames = new System.Collections.Generic.Dictionary<string, VariableValue>();
-            numberNames.Add("Model", VariableValue.FromObject("Audi"));
-            await client.ProcessDefinitions.ByKey("Process_1").StartProcessInstance(new Camunda.Api.Client.ProcessDefinition.StartProcessInstance() { Variables = numberNames });
+            //System.Collections.Generic.Dictionary<string, VariableValue> numberNames = new System.Collections.Generic.Dictionary<string, VariableValue>();
+            //numberNames.Add("Model", VariableValue.FromObject("Audi"));
+            //await client.ProcessDefinitions.ByKey("Process_1").StartProcessInstance(new Camunda.Api.Client.ProcessDefinition.StartProcessInstance() { Variables = numberNames });
 
             // Complete Step
 
@@ -37,17 +40,17 @@ namespace DoxFrame.Hub.Infrastructure
             // Complete a Task
 
             // build query
-            var externalTaskQuery = new Camunda.Api.Client.ExternalTask.ExternalTaskQuery() { Active = true, TopicName = "MyTask" };
+            //var externalTaskQuery = new Camunda.Api.Client.ExternalTask.ExternalTaskQuery() { Active = true, TopicName = "MyTask" };
 
             // add some sorting
-            externalTaskQuery
-                .Sort(Camunda.Api.Client.ExternalTask.ExternalTaskSorting.TaskPriority, SortOrder.Descending)
-                .Sort(Camunda.Api.Client.ExternalTask.ExternalTaskSorting.LockExpirationTime);
+            //externalTaskQuery
+            //    .Sort(Camunda.Api.Client.ExternalTask.ExternalTaskSorting.TaskPriority, SortOrder.Descending)
+            //    .Sort(Camunda.Api.Client.ExternalTask.ExternalTaskSorting.LockExpirationTime);
 
             // request external tasks according to query
-            System.Collections.Generic.List<Camunda.Api.Client.ExternalTask.ExternalTaskInfo> tasks = await client.ExternalTasks.Query(externalTaskQuery).List();
+            //System.Collections.Generic.List<Camunda.Api.Client.ExternalTask.ExternalTaskInfo> tasks = await client.ExternalTasks.Query(externalTaskQuery).List();
 
-            _logger.LogWarning($"Camunda {0} Message {process}.");
+            //_logger.LogWarning($"Camunda {0} Message {process}.");
         }
 
        

@@ -40,14 +40,13 @@ namespace DoxFrame.Hub.Infrastructure.Data
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<HubUser> HubUsers { get; set; }
         public DbSet<Form> Forms { get; set; }
-        public DbSet<Process> Processes { get; set; }
+        public DbSet<Workflow> Workflows { get; set; }
         public DbSet<Project> Projects { get; set; }
+        public DbSet<Component> Components { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyAllConfigurationsFromCurrentAssembly();
 
             // alternately this is built-in to EF Core 2.2
             //modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

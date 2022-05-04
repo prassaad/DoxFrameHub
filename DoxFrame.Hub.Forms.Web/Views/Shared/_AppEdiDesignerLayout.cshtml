@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <cache vary-by-cookie=".AspNetCore.Identity.Application">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <title> @ViewData["Title"] - DoxFrame Hub </title>
+
+
+        <environment names="Development,Staging,Production">
+            <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+            @*<link rel="stylesheet" href="~/css/site.css" />
+                <link rel="stylesheet" href="~/css/offcanvas.css" />*@
+            <link href="/css/sidebars.css" rel="stylesheet">
+        </environment>
+        <!--<environment names="Staging,Production">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/5.1.3/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />-->
+        @*<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
+        <!--<link href="~/css/sidebars.css" rel="stylesheet">
+        </environment>-->
+
+
+
+    </cache>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @@media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center d-none" id="divSpinner">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <div id="divAlert" style="display:none" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div id="txtAlertMessage">&nbsp;</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        @RenderBody()
+    </div>
+
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/sidebars.js"></script>
+        @*<script src="~/js/site.js" asp-append-version="true"></script>*@
+        <script src="~/js/offcanvas.js" asp-append-version="true"></script>
+    </environment>
+    <!--<environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.2.1.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/5.1.3/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"></script>-->
+    @*<script src="~/js/site.min.js" asp-append-version="true"></script>*@
+    <!--<script src="~/js/sidebars.js"></script>
+    </environment>-->
+    <!-- Global for Application  -->
+    <script src="/js/AjaxHelper.js"></script>
+    @*<script src="custom/Utility.js"></script>*@
+    <script src="/js/ValidationHelper.js"></script>
+    <!-- Global for Application -->
+    @* Tool *@
+    <script src="/js/Utility.js"></script>
+
+    @* Forms Tool Scripts*@
+
+    <script src="/forms/js/jquery.ui.min.js"></script>
+    <script src="/forms/js/bootstrap.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -11,7 +11,7 @@ namespace DoxFrame.Hub.Core.Interfaces
     {
         Task<Result<Form>> GetNextUnpublishedFormAsync(Guid formId);
         Task<Result<List<Form>>> GetAllUnpublishedFormsAsync(Guid formId, string searchString);
-        Task<Form> GeFormByIdAsync(Guid projectId, Guid formId);
+        Task<Form> GetFormByIdAsync(Guid projectId, Guid formId);
         //Task<Form> GeFormLayoutByIdAsync(Guid projectId, Guid formId);
     }
 }

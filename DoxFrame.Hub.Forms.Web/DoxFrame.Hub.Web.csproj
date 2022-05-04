@@ -11,6 +11,17 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Areas\Admin\**" />
+    <Compile Remove="Areas\WorkFlows\**" />
+    <Content Remove="Areas\Admin\**" />
+    <Content Remove="Areas\WorkFlows\**" />
+    <EmbeddedResource Remove="Areas\Admin\**" />
+    <EmbeddedResource Remove="Areas\WorkFlows\**" />
+    <None Remove="Areas\Admin\**" />
+    <None Remove="Areas\WorkFlows\**" />
+  </ItemGroup>
+
   
 
   <ItemGroup>
@@ -37,18 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
-    <Folder Include="Areas\Forms\Views\Shared\" />
-    <Folder Include="Areas\WorkFlows\Controllers\" />
-    <Folder Include="Areas\WorkFlows\Data\" />
-    <Folder Include="Areas\WorkFlows\Models\" />
-    <Folder Include="Areas\WorkFlows\Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="wwwroot\app\js\scripts.js" />
     <None Include="wwwroot\bpmn-js\BPMNEditor.js" />
     <None Include="wwwroot\bpmn-js\index.js" />
     <None Include="wwwroot\bpmn-js\vendor\bpmn-js\assets\bpmn-font\font\bpmn.svg" />

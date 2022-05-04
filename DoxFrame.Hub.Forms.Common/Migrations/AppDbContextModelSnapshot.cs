@@ -34,6 +34,12 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("DOB")
                         .HasColumnType("text");
 
@@ -41,7 +47,6 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("FiscalYearEndDate")
@@ -92,6 +97,12 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("ModifiedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("ModifiedByName")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -109,9 +120,6 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
 
                     b.Property<string>("ProfileImage")
                         .HasColumnType("text");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("ResumeDocPath")
                         .HasColumnType("text");
@@ -157,11 +165,16 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("Domain")
                         .HasColumnType("text");
 
                     b.Property<string>("DomainName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("EnvironmentTag")
@@ -197,6 +210,12 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("ModifiedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("ModifiedByName")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -208,9 +227,6 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
 
                     b.Property<int>("NoOfTenats")
                         .HasColumnType("integer");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
 
                     b.Property<string>("Region")
                         .HasColumnType("text");
@@ -243,27 +259,26 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Category")
+                    b.Property<string>("Area")
                         .HasColumnType("text");
+
+                    b.Property<Guid>("ComponentId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<bool?>("EndUserEdit")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Group")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
                     b.Property<Guid>("HubUserId")
                         .HasColumnType("uuid");
-
-                    b.Property<bool>("IsPreDefined")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("Key")
                         .HasColumnType("text");
@@ -274,16 +289,13 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("ModifiedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("ModifiedByName")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("OperationType")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProcessArea")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProcessName")
                         .HasColumnType("text");
 
                     b.Property<Guid>("ProjectId")
@@ -295,24 +307,20 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<string>("RequestUri")
                         .HasColumnType("text");
 
-                    b.Property<string>("SubCategory")
-                        .HasColumnType("text");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Trigger")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
                     b.Property<int>("WorkFlowStatus")
                         .HasColumnType("integer");
+
+                    b.Property<string>("WorkflowName")
+                        .HasColumnType("text");
 
                     b.Property<bool>("isActive")
                         .HasColumnType("boolean");
@@ -322,93 +330,12 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ComponentId")
+                        .IsUnique();
+
                     b.HasIndex("ProjectId");
 
                     b.ToTable("Forms");
-                });
-
-            modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Process", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("DeploymentId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Diagram")
-                        .HasColumnType("text");
-
-                    b.Property<bool?>("EndUserEdit")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Group")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<Guid>("HubUserId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsPreDefined")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("text");
-
-                    b.Property<byte[]>("Layout")
-                        .HasColumnType("bytea");
-
-                    b.Property<Guid>("ModifiedBy")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("ProjectId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Resource")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SubCategory")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Suspended")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("VersionNumber")
-                        .HasColumnType("text");
-
-                    b.Property<string>("VersionTag")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Processes");
                 });
 
             modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Project", b =>
@@ -423,6 +350,12 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedTime")
+                        .HasColumnType("text");
+
                     b.Property<string>("EndDate")
                         .HasColumnType("text");
 
@@ -432,8 +365,11 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.Property<Guid>("ModifiedBy")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid>("ModifiedByName")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedTime")
+                        .HasColumnType("text");
 
                     b.Property<string>("StartDate")
                         .HasColumnType("text");
@@ -445,15 +381,166 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TenantId");
 
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Workflow", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ComponentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DeploymentId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Diagram")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("HubUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("Layout")
+                        .HasColumnType("bytea");
+
+                    b.Property<Guid>("ModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ModifiedByName")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Resource")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Suspended")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VersionNumber")
+                        .HasColumnType("text");
+
+                    b.Property<string>("VersionTag")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId")
+                        .IsUnique();
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Workflows");
+                });
+
+            modelBuilder.Entity("DoxFrame.Hub.SharedKernel.Component", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ComponentType")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CreatedByName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CreatedTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("EndUserEdit")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("HubUserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsGroup")
+                        .HasMaxLength(200)
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPreDefined")
+                        .HasColumnType("boolean");
+
+                    b.Property<Guid>("ModifiedBy")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ModifiedByName")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ModifiedTime")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ParetnId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("SubCategory")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Components");
                 });
 
             modelBuilder.Entity("DoxFrame.Hub.Core.AccountAggregate.Tenant", b =>
@@ -467,17 +554,14 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
 
             modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Form", b =>
                 {
-                    b.HasOne("DoxFrame.Hub.Core.ProjectAggregate.Project", null)
-                        .WithMany("Forms")
-                        .HasForeignKey("ProjectId")
+                    b.HasOne("DoxFrame.Hub.SharedKernel.Component", null)
+                        .WithOne("Form")
+                        .HasForeignKey("DoxFrame.Hub.Core.ProjectAggregate.Form", "ComponentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Process", b =>
-                {
                     b.HasOne("DoxFrame.Hub.Core.ProjectAggregate.Project", null)
-                        .WithMany("Processes")
+                        .WithMany("Forms")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -488,6 +572,30 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
                     b.HasOne("DoxFrame.Hub.Core.AccountAggregate.Tenant", null)
                         .WithMany("projects")
                         .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Workflow", b =>
+                {
+                    b.HasOne("DoxFrame.Hub.SharedKernel.Component", null)
+                        .WithOne("Workflow")
+                        .HasForeignKey("DoxFrame.Hub.Core.ProjectAggregate.Workflow", "ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DoxFrame.Hub.Core.ProjectAggregate.Project", null)
+                        .WithMany("Workflows")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DoxFrame.Hub.SharedKernel.Component", b =>
+                {
+                    b.HasOne("DoxFrame.Hub.Core.ProjectAggregate.Project", null)
+                        .WithMany("Components")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -504,9 +612,18 @@ namespace DoxFrame.Hub.Infrastructure.Migrations
 
             modelBuilder.Entity("DoxFrame.Hub.Core.ProjectAggregate.Project", b =>
                 {
+                    b.Navigation("Components");
+
                     b.Navigation("Forms");
 
-                    b.Navigation("Processes");
+                    b.Navigation("Workflows");
+                });
+
+            modelBuilder.Entity("DoxFrame.Hub.SharedKernel.Component", b =>
+                {
+                    b.Navigation("Form");
+
+                    b.Navigation("Workflow");
                 });
 #pragma warning restore 612, 618
         }
