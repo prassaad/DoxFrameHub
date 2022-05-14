@@ -11,7 +11,7 @@ using System.Text;
 
 namespace DoxFrame.Hub.Core.Services
 {
-    public class WorkflowsRepository : IProcessesRepository 
+    public class WorkflowsRepository : IWorkflowRepository 
     {
          
         private readonly IRepository<Project> _repository;

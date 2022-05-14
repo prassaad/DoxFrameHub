@@ -52,8 +52,8 @@
                     if (currTenantUserProfile == null)
                     {
                         //@Html.ActionLink("Log In", "Login", "Account")
-                        Context.Response.Redirect("Account/Logout");
-
+                        //Context.Response.Redirect("/Account/Logout");
+                         
                     }
                     else
                     {
@@ -174,10 +174,11 @@
                         @name
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item"  asp-area="Identity" asp-page="/Account/Manage/Index">Manage Account</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Logout">Sign out</a></li>
+                        <li>
+                            <a class="dropdown-item"  asp-area="Identity" asp-page="/Account/Logout">Log out</a>
+                        </li>
                     </ul>
                 </div>
             </div>

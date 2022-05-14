@@ -3,7 +3,7 @@ using System;
 
 namespace DoxFrame.Hub.Web.ViewModels
 {
-    public class WorflowViewModel : CreateUpdateProcessViewModel
+    public class WorflowViewModel : CreateUpdateWorkflowViewModel
     {
         public Guid ProjectId { get; set; }
         public Guid Id { get; set; }
@@ -23,7 +23,7 @@ namespace DoxFrame.Hub.Web.ViewModels
         }
     }
   
-    public class CreateUpdateProcessViewModel
+    public class CreateUpdateWorkflowViewModel
     {
         public string Key { get; set; }
     }

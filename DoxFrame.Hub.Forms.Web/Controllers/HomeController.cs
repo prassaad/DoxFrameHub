@@ -10,7 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using DoxFrame.Hub.Web.Extensions;
+using DoxFrame.Hub.Web.Extensions; 
 
 namespace DoxFrame.Hub.Web.Controllers
 {
@@ -20,18 +20,20 @@ namespace DoxFrame.Hub.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IRepository<HubUser> _userRepository;
         private readonly IRepository<Tenant> _tenantRepository;
-
+       
         public HomeController(ILogger<HomeController> logger, IRepository<HubUser> userRepository, IRepository<Tenant> tenantRepository)
         {
             _logger = logger;
             _userRepository = userRepository;
             _tenantRepository = tenantRepository;
+           
         }
 
         [Authorize]
         public async Task<IActionResult> IndexAsync()
         {
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            // var accessToken = await HttpContext.GetTokenAsync("access_token");
+            //var userIdentity = await _userManager.GetUserAsync(User);
 
             //Check for Hub User Account
 
@@ -58,13 +60,14 @@ namespace DoxFrame.Hub.Web.Controllers
             //Check for first Teant to start development simlar way as Account process
             var tenantSpec = new TenantByIdWithProjectsSpec(user.Id);
             var tenant = await _tenantRepository.GetBySpecAsync(tenantSpec);
-            if (tenant == null) {
-                 
-                return RedirectToAction("Welcome", "Tenant", new TenantViewModel() { HubUserId=user.Id });
+            if (tenant == null)
+            {
+
+                return RedirectToAction("Welcome", "Tenant", new TenantViewModel() { HubUserId = user.Id });
             }
 
             //Finally the Profile and Tenat setup done
-          
+
             // State Management Tenant and Hub User Profile
             if (tenant != null)
             {
@@ -82,7 +85,7 @@ namespace DoxFrame.Hub.Web.Controllers
                 };
 
                 ViewBag.TotalProjects = tenant.projects.Count();
-                
+
                 // Requires SessionExtensions .
                 if (HttpContext.Session.Get<TenantUserProfileViewModel>(TenantUserProfileSessionKey) == default)
                 {
@@ -92,7 +95,7 @@ namespace DoxFrame.Hub.Web.Controllers
             }
             // In case reached here, there is some thing flaw to be analyzed
             return RedirectToAction("Error");
-
+            
         }
 
      

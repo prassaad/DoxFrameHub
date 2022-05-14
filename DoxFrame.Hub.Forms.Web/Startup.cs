@@ -1,11 +1,11 @@
 using Ardalis.ListStartupServices;
-using Auth0.AspNetCore.Authentication;
 using Autofac;
 using DoxFrame.Hub.Core;
 using DoxFrame.Hub.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -28,10 +28,6 @@ namespace DoxFrame.Hub.Web
        
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddRazorPages()
-            .AddRazorRuntimeCompilation();
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -43,8 +39,15 @@ namespace DoxFrame.Hub.Web
 
             services.AddDbContext(connectionString);
 
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<Infrastructure.Data.AppDbContext>();
+            services.AddControllersWithViews();
+            services.AddRazorPages()
+            .AddRazorRuntimeCompilation();
+
+
+
             services.AddControllersWithViews().AddNewtonsoftJson();
-            services.AddRazorPages();
+            
 
             services.AddSwaggerGen(c =>
             {
@@ -62,19 +65,20 @@ namespace DoxFrame.Hub.Web
             });
 
             //Auth0
-            services
-                .AddAuth0WebAppAuthentication(options =>
-                {
-                    options.Domain = Configuration["Auth0:Domain"];
-                    options.ClientId = Configuration["Auth0:ClientId"];
-                    options.ClientSecret = Configuration["Auth0:ClientSecret"];
-                    options.Scope = "openid profile email metadata";
-                    //options.Scope = "picture";
+            //services
+            //    .AddAuth0WebAppAuthentication(options =>
+            //    {
+            //        options.Domain = Configuration["Auth0:Domain"];
+            //        options.ClientId = Configuration["Auth0:ClientId"];
+            //        options.ClientSecret = Configuration["Auth0:ClientSecret"];
+            //        options.Scope = "openid profile email metadata";
+            //        //options.Scope = "picture";
                   
-                }).WithAccessToken(options =>
-                {
-                    options.Audience = Configuration["Auth0:Audience"];
-                });
+            //    }).WithAccessToken(options =>
+            //    {
+            //        // Configure the Claims Issuer to be Auth0
+            //        options.Audience = Configuration["Auth0:Audience"];
+            //    });
 
             //Added for session state
             services.AddDistributedMemoryCache();
@@ -136,28 +140,38 @@ namespace DoxFrame.Hub.Web
             app.UseAuthentication();
             app.UseAuthorization();
 
-           
+            //app.UseEndpoints(endpoints =>
+            //{
+
+            // endpoints.MapControllerRoute(
+            //"defaultFormViewEdit", // Route name
+            //"{projectId:Guid}/edit/form/{componentId:Guid}", // URL with parameters
+            //    new { controller = "Project", action = "FormEditView" }
+            //);
+
+
+            // endpoints.MapControllerRoute(
+            // name: "Areas",
+            // pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+            // endpoints.MapControllerRoute(
+            // name: "default",
+            // pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            // endpoints.MapRazorPages();
+
+            //});
+
             app.UseEndpoints(endpoints =>
             {
- 
-             endpoints.MapControllerRoute(
-            "defaultFormViewEdit", // Route name
-            "{projectId:Guid}/edit/form/{componentId:Guid}", // URL with parameters
-                new { controller = "Project", action = "FormEditView" }
-            );
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-             endpoints.MapControllerRoute(
-             name: "Areas",
-             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
-             endpoints.MapControllerRoute(
-             name: "default",
-             pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                endpoints.MapRazorPages();
             });
 
-          
 
 
 

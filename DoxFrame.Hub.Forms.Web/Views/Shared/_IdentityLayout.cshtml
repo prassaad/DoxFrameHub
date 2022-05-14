@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+ </head>
+<body>
+    <div class="container body-content">
+       <div class="px-5 ms-xl-4">
+         <img src="~/img/logo.png" class="bi me-2" height="36" />
+        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2022 - DoxFrame</p>
+        </footer>
+    </div>
+
+   
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

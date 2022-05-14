@@ -4,6 +4,8 @@ using DoxFrame.Hub.Core.ProjectAggregate;
 using DoxFrame.Hub.SharedKernel;
 using DoxFrameHub.SharedKernel;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
@@ -11,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace DoxFrame.Hub.Infrastructure.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         private readonly IMediator _mediator;
 
